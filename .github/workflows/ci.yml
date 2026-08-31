@@ -1,0 +1,39 @@
+# CI de Kavana Apartaments.
+#
+# Se ejecuta en cada pull request y en cada push a master.
+# Node 22.x: @angular/build 22.0.9 declara engines node "^22.22.3 || ^24.15.0 || >=26.0.0"
+# y el CI fuerza Node 22 aunque el package.json raiz diga >=20.0.0.
+# Si el job falla, el PR queda bloqueado (check "ci" en rojo) y, con branch
+# protection activada, los pushes a master con CI en rojo se rechazan.
+name: CI
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [master]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: Lint, test y build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: npm
+
+      - name: Instalar dependencias (npm ci)
+        run: npm ci
+
+      # run-many ejecuta cada target solo en los proyectos que lo tienen.
+      # api-e2e solo define el target e2e, asi que no participa en lint ni test ni build.
+      - name: Lint, test y build (Nx run-many)
+        run: npx nx run-many -t lint test build

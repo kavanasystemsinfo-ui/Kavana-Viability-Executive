@@ -1,0 +1,293 @@
+scenarios:
+  - id: mediterranea_001
+    domain: "strategy"
+    title: "Presión de tipos y ralentización de la demanda: ¿bajamos la tabla de precios para acelerar las ventas del remanente de La Marina y el lanzamiento de Los Naranjos?"
+    company_context:
+      stage: "Private / Established"
+      industry: "Residential Real Estate Development"
+      headcount: 42
+      arr_eur: 18500000
+      monthly_burn_eur: 720000
+    situation: |
+      Euribor a 3,9% (sept 2025), hipotecas fijas al 3,5-4,0%. La demanda de vivienda nueva se ha enfriado 
+      un 18% interanual en la Comunitat Valenciana. Tenemos 14 unidades remanentes en La Marina (fase 2, 
+      entrega oct 2025) y 72 unidades por lanzar en Los Naranjos (licencia objetivo oct 2025). 
+      La competencia (TM, Bertolín) ha lanzado campañas "precio cerrado + gastos incluidos" que erosionan 
+      nuestro diferencial de calidad. Nuestro CAC ha subido de 4.200€ a 6.800€/lead cualificado.
+    options:
+      - id: opcion_a
+        label: "Mantener precios, reforzar valor (calidad, plazos, personalización)"
+        description: |
+          No tocar tabla de precios. Invertir 180k€ en campaña "Calidad que se ve, plazos que se cumplen": 
+          visitas obra guiadas, portal cliente con avances reales, paquetes personalización incluidos. 
+          Aceptar velocidad de venta menor (0,8 ud/mes vs 1,2 objetivo) pero proteger margen unitario.
+        pros:
+          - "Protege margen bruto unitario (~42k€/ud en remanente La Marina)"
+          - "Coherencia con posicionamiento premium"
+          - "Evita efecto ancla para Los Naranjos (mismo municipio)"
+        cons:
+          - "Remanente La Marina puede llegar a entrega sin vender (coste financiero + mantenimiento)"
+          - "Los Naranjos lanza con 12 uds vendidas vs target 30 pre-licencia"
+          - "CAC sigue alto, eficiencia comercial baja"
+        financial_impact:
+          revenue_eur: -420000
+          margin_eur: 0
+          cash_flow_timing: "Diferido (ventas más lentas)"
+        risk_level: "Medio"
+      - id: opcion_b
+        label: "Descuento selectivo 3-4% en remanente La Marina, precios estándar Los Naranjos"
+        description: |
+          Aplicar descuento 3% (2 dorm) / 4% (3-4 dorm) solo a las 14 uds remanentes La Marina, 
+          comunicado como "Oferta entrega inmediata". Los Naranjos sale a tabla oficial. 
+          Coste campaña: 90k€. Target: liquidar remanente en 8 semanas.
+        pros:
+          - "Liquida stock antes de entrega (evita coste financiero post-entrega ~18k€/mes)"
+          - "Señal de mercado: 'Kavana ajusta pero no regala'"
+          - "Los Naranjos mantiene ancla de precio"
+        cons:
+          - "Erosiona margen remanente: -2,8M€ revenue, -1,1M€ margen bruto"
+          - "Riesgo reclamaciones compradores ya firmados (cláusula mejor precio)"
+          - "Precedente: compradores futuros esperarán descuento"
+        financial_impact:
+          revenue_eur: -2800000
+          margin_eur: -1100000
+          cash_flow_timing: "Inmediato (cobro 10% reserva + 90% entrega)"
+        risk_level: "Alto"
+      - id: opcion_c
+        label: "Campaña 'Todo incluido' sin bajar precio base: gastos escritura + muebles cocina + plaza garaje"
+        description: |
+          Mantener precio catálogo. Incluir: gastos notaría/registro/gestoría (~6k€), pack muebles 
+          cocina premium (~12k€), plaza garaje (~15k€). Coste real empresa ~22k€/ud vs valor percibido 33k€. 
+          Aplicable a La Marina remanente + primeras 20 reservas Los Naranjos. Coste campaña: 120k€.
+        pros:
+          - "Precio catálogo intacto (protege ancla Los Naranjos y referencia mercado)"
+          - "Valor percibido > coste real (apalancamiento 1,5x)"
+          - "Diferenciación real vs competencia 'precio cerrado'"
+          - "Sin riesgo reclamaciones precio base"
+        cons:
+          - "Coste directo 308k€ (14 uds La Marina) + 440k€ (20 uds Los Naranjos) = 748k€"
+          - "Complejidad operativa (proveedores muebles, plazos entrega)"
+          - "No resuelve fondo: tipos altos siguen frenando decisión"
+        financial_impact:
+          revenue_eur: 0
+          margin_eur: -748000
+          cash_flow_timing: "Diferido (coste en entrega)"
+        risk_level: "Bajo-Medio"
+    decision_criteria:
+      - "Impacto en NAV a 12 meses"
+      - "Señal de mercado a competencia y compradores"
+      - "Riesgo jurídico (reclamaciones mejor precio)"
+      - "Efecto ancla sobre Los Naranjos y pipeline 2026"
+      - "Necesidad de caja a corto plazo (Q4 2025)"
+    recommended: "opcion_c"
+    rationale: |
+      La opción C protege el ancla de precios (crítico para Los Naranjos y pipeline), diferencia 
+      realmente vs competencia (ellos bajan precio, nosotros damos más valor), evita riesgos jurídicos 
+      y el coste (748k€) es asumible vs margen proyectado 3,2M€ La Marina + 3,8M€ Los Naranjos. 
+      La clave es ejecutar impecable: proveedores muebles con stock, plazos garantizados, comunicación 
+      clara "precio catálogo + pack valor 33k€". Si a 4 semanas no hay tracción (target 4 reservas/semana), 
+      activar opción B solo para 4 uds La Marina (último recurso).
+    tags:
+      - "pricing"
+      - "comercial"
+      - "remates"
+      - "lanzamiento"
+      - "tipos-interes"
+    created_at: "2025-09-15"
+    created_by: "jorge-adan"
+    status: "active"
+
+  - id: mediterranea_002
+    domain: "finance"
+    title: "Estructuración deuda promociones 2026: ¿cómo cerrar 45M€ crédito promotor con tipos en 3,9% y LTV bancario max 60%?"
+    company_context:
+      stage: "Private / Established"
+      industry: "Residential Real Estate Development"
+      headcount: 42
+      arr_eur: 18500000
+      monthly_burn_eur: 720000
+    situation: |
+      Pipeline 2026: Los Naranjos (14M€ deuda), Mar Azul (15M€), Cala Serena (20M€) = 49M€ necesidad. 
+      Bancos exigen LTV 60% sobre valor tasación (no coste), pre-ventas mín 30% para firmar, 
+      DSCR > 1,2x. Tasaciones vienen 8-10% por debajo coste por tipos. Tenemos 2,1M€ caja libre, 
+      4,7M€ tesorería total. Necesitamos estructura que minimice coste medio y preserve caja para 
+      opciones suelo 2026 (target 3 nuevas).
+    options:
+      - id: opcion_a
+        label: "Club deal sindicado 3 bancos (CaixaBank, Sabadell, Unicaja) - tramo único por promoción"
+        description: |
+          Una entidad agente por promoción, sindicado 2-3 bancos. Tramo único senior, 
+          LTV 60% tasación, Euribor + 1,95-2,15%, comisión apertura 0,75%, commit fee 0,35%.
+          Pre-ventas requeridas: 30% (La Marina ya 85%, Los Naranjos 15%, Mar Azul 0%, Cala Serena 0%).
+        pros:
+          - "Relación bancaria diversificada, no concentración"
+          - "Proceso estándar, conocido por equipo"
+          - "Flexibilidad futura (ampliaciones, novaciones)"
+        cons:
+          - "Pre-ventas 30% bloquea Mar Azul y Cala Serena (necesitan equity bridge)"
+          - "Coste medio ~4,9-5,1% (Euribor 3,9% + spread)"
+          - "Tiempo cierre: 3-4 meses por promoción"
+        financial_impact:
+          annual_cost_eur: 2350000
+          equity_required_eur: 8500000
+          timeline_months: 4
+        risk_level: "Alto"
+      - id: opcion_b
+        label: "Financiación alternativa: Fondo deuda privada (ICG, Trea, Azora) + banco senior 50%"
+        description: |
+          Senior bancario 50% LTV (Euribor + 1,75%), Mezzanine fondo 25% LTV (8-9% fijo), 
+          Equity Kavana 25%. Fondo entra en promociones con pre-ventas <30% (Mar Azul, Cala Serena). 
+          Coste blendado ~5,8-6,2% pero libera caja y permite cerrar ya.
+        pros:
+          - "Cierra financiación Mar Azul y Cala Serena SIN pre-ventas 30%"
+          - "Libera 6-7M€ caja vs opción A (menos equity requerido)"
+          - "Velocidad: 6-8 semanas closing"
+        cons:
+          - "Coste blendado superior (~6% vs 5%)"
+          - "Covenants más estrictos (reporting mensual, restricción dividendos)"
+          - "Relación nueva, due diligence exhaustiva"
+        financial_impact:
+          annual_cost_eur: 2850000
+          equity_required_eur: 3200000
+          timeline_months: 2
+        risk_level: "Medio"
+      - id: opcion_c
+        label: "Híbrida: Senior banco 60% + Mezzanine ligero 10% (ICO/Fondos NextGen) + Equity 30%"
+        description: |
+          Aprovechar líneas ICO Empresas / Fondos NextGen para tramo mezzanine 10% LTV al 4-5% fijo 
+          (subvencionado). Senior banco 60% LTV estándar. Equity 30%. Requiere certificación 
+          eficiencia energética A/B (todas nuestras promociones लक्ष्य). 
+          Coste blendado ~4,5-4,8%.
+        pros:
+          - "Coste más bajo (subvención mezzanine)"
+          - "Alineado con estrategia sostenibilidad (certificación A/B)"
+          - "Menos equity que opción A, más que B"
+        cons:
+          - "Trámite ICO/NextGen: 2-3 meses extra, burocracia"
+          - "Disponibilidad fondos limitada (convocatorias)"
+          - "Requisito certificación A/B: riesgo si alguna promo no alcanza"
+        financial_impact:
+          annual_cost_eur: 2150000
+          equity_required_eur: 5800000
+          timeline_months: 5
+        risk_level: "Medio-Alto"
+    decision_criteria:
+      - "Coste medio deuda ponderado (target <5,5%)"
+      - "Caja libre preservada para opciones suelo (target >3M€)"
+      - "Velocidad cierre (target <3 meses para Los Naranjos)"
+      - "Flexibilidad operativa (covenants, dividendos)"
+      - "Diversificación fuentes financiación"
+    recommended: "opcion_b"
+    rationale: |
+      La opción B es la única que permite cerrar Mar Azul y Cala Serena en plazo (Q4 2025) sin 
+      esperar pre-ventas 30%. El coste extra (~500k€/año vs A) se compensa liberando 5,3M€ caja 
+      para opciones suelo 2026 (valor estratégico > coste financiero). Negociar covenants: 
+      reporting trimestral (no mensual), carve-out dividendos hasta 30% beneficio neto, 
+      basket permisivo para nuevas adquisiciones suelo. Cerrar con 2 fondos (diversificación) 
+      + 2 bancos senior (CaixaBank + Sabadell).
+    tags:
+      - "financiacion"
+      - "deuda"
+      - "project-finance"
+      - "pipeline-2026"
+      - "tesoreria"
+    created_at: "2025-09-10"
+    created_by: "andres-vidal"
+    status: "active"
+
+  - id: mediterranea_003
+    domain: "operations"
+    title: "Retraso licencia Los Naranjos: alegaciones vecinales por altura y densidad. ¿Recurrimos contencioso o reducimos 2 plantas (16 uds) para desbloquear?"
+    company_context:
+      stage: "Private / Established"
+      industry: "Residential Real Estate Development"
+      headcount: 42
+      arr_eur: 18500000
+      monthly_burn_eur: 720000
+    situation: |
+      Licencia Los Naranjos solicitada Feb 2025. 12 alegaciones vecinales: 8 por altura (PB+6 vs PB+4 zona), 
+      4 por densidad (84 uds vs 60 uds/ha permitidos). Informe técnico municipal: "favorable condicionado 
+      a reducir 2 plantas o compensar densidad". Plazo resolución: 3 meses (Objetivo Oct 2025). 
+      Si recurrimos contencioso: 18-24 meses, coste 80-120k€ abogados+peritos, 60% estimación éxito. 
+      Si reducimos: -16 uds (8 de 3 dorm, 8 de 2 dorm), -1,5M€ revenue, -0,6M€ margen, 
+      pero licencia en 6 semanas y lanzamiento comercial Nov 2025.
+    options:
+      - id: opcion_a
+        label: "Recurso contencioso-administrativo + medida cautelar"
+        description: |
+          Interponer recurso + solicitar medida cautelar para mantener licencia original. 
+          Abogados: Carlos Martínez (in-house) + despacho externo urbanismo (Urbanlex). 
+          Coste estimado 100k€. Probabilidad éxito 60%. Si gana: licencia original, 0 pérdida unidades. 
+          Si pierde: 18-24 meses perdidos + coste.
+        pros:
+          - "Mantiene 84 uds y revenue/margen completo"
+          - "Defiende planeamiento: evita precedente 'ceder ante alegaciones'"
+          - "Señal a mercado/ayuntamientos: Kavana defiende sus derechos"
+        cons:
+          - "Incertidumbre 18-24 meses: bloquea financiación, contratación, lanzamiento"
+          - "Coste oportunidad: 1,5M€ margen * 1,5 años = ~2,2M€ VAN"
+          - "Riesgo perder (40%) = 0 uds + 2 años retraso"
+        financial_impact:
+          expected_value_eur: -900000
+          timeline_months: 18
+        risk_level: "Muy Alto"
+      - id: opcion_b
+        label: "Reducir 2 plantas (PB+4), 68 uds, licencia exprés"
+        description: |
+          Aceptar condicionado municipal: reducir a PB+4 (68 uds: 22x2dorm, 38x3dorm, 8xáticos). 
+          Modificar proyecto básico (4 semanas), nueva licencia (2 semanas). 
+          Lanzamiento comercial Nov 2025. Pérdida neta: 16 uds * 32k€ margen medio = 512k€ margen.
+        pros:
+          - "Certidumbre: licencia Nov 2025, financiación Dic 2025, obra Ene 2026"
+          - "Velocidad: first-mover vs competencia (2 promociones vecinas lanzan 2026)"
+          - "Coste conocido y acotado (512k€ margen)"
+        cons:
+          - "Pérdida 16 uds (19% stock), 1,5M€ revenue"
+          - "Precedente: ayuntamientos saben que Kavana cede"
+          - "Densidad resultante 58 uds/ha (cerca límite, menos margen maniobra)"
+        financial_impact:
+          revenue_eur: -1500000
+          margin_eur: -512000
+          timeline_months: 1.5
+        risk_level: "Bajo"
+      - id: opcion_c
+        label: "Híbrida: Recurso + modificación proyecto en paralelo (opción real)"
+        description: |
+          Presentar recurso contencioso (preserva derechos) Y simultáneamente preparar modificación 
+          proyecto a PB+4. Si medida cautelar concedida (30% prob) → licencia original. 
+          Si denegada (70%) → ya tenemos proyecto modificado listo, licencia en 2 semanas. 
+          Coste extra: 40k€ proyecto modificado + 60k€ recurso = 100k€.
+        pros:
+          - "Preserva opción valor (upside 16 uds si gana recurso)"
+          - "Elimina riesgo cola: licencia garantizada en 6-8 semanas worst-case"
+          - "Señal equilibrada: defiende derechos pero gestiona riesgo"
+        cons:
+          - "Coste 100k€ seguro (proyecto modificado + recurso)"
+          - "Complejidad gestión paralela"
+          - "Si gana recurso: haber gastado en proyecto modificado innecesario"
+        financial_impact:
+          expected_value_eur: -200000
+          timeline_months: 2
+        risk_level: "Medio"
+    decision_criteria:
+      - "Valor esperado (probabilidad * impacto)"
+      - "Time-to-market (crítico para financiación y ventas 2026)"
+      - "Señal a ayuntamientos y competencia"
+      - "Coste de oportunidad de caja y equipo"
+    recommended: "opcion_c"
+    rationale: |
+      La opción C es la real option value: por 100k€ compramos el derecho a mantener 84 uds si gana 
+      el recurso (30% prob, valor 1,5M€ revenue) y garantizamos licencia en 68 uds en 6-8 semanas 
+      si pierde (70% prob). Valor esperado: 0,3 * 1,5M€ - 100k€ = 350k€ upside neto vs opción B. 
+      Además, señal correcta: "recurrimos pero tenemos plan B listo". Ejecutar: esta semana presentar 
+      recurso + encargar modificación proyecto a Pablo Ortiz (2 semanas). Paralelamente, preparar 
+      lanzamiento comercial 68 uds para activar en cuanto haya resolución cautelar (estimado 3 semanas).
+    tags:
+      - "licencias"
+      - "urbanismo"
+      - "contencioso"
+      - "time-to-market"
+      - "real-options"
+    created_at: "2025-09-20"
+    created_by: "carlos-martinez"
+    status: "active"

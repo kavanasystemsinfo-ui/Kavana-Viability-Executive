@@ -1,0 +1,235 @@
+departments:
+  - id: direccion-general
+    name: "Dirección General"
+    head: "jorge-adan"
+    description: "Estrategia corporativa, financiación estructurada, relaciones institucionales, junta/socios, M&A"
+    headcount: 2
+    budget_eur_year: 450000
+    key_processes:
+      - "Plan estratégico anual (Oct-Nov)"
+      - "Aprobación inversión nuevas promociones"
+      - "Reporting a socios/junta (trimestral)"
+      - "Gestión financiación corporativa"
+    kpis:
+      - "NAV per share growth"
+      - "Deuda neta / EBITDA"
+      - "Rentabilidad sobre capital (ROE)"
+      - "Pipeline promociones (M€)"
+
+  - id: finanzas
+    name: "Finanzas"
+    head: "andres-vidal"
+    description: "Tesorería, contabilidad, reporting, financiación promociones, fiscal, compliance financiero"
+    headcount: 5
+    budget_eur_year: 680000
+    sub_areas:
+      - name: "Tesorería y Caja"
+        headcount: 2
+        responsibilities:
+          - "Gestión diaria de caja multi-promoción"
+          - "Previsión de flujos (13 semanas rolling)"
+          - "Relación bancaria operativa"
+      - name: "Contabilidad y Reporting"
+        headcount: 2
+        responsibilities:
+          - "Contabilidad general y analítica (por promoción)"
+          - "Cierres mensuales/trimestrales"
+          - "Reporting bancario (BEI, ICO, privadas)"
+          - "Estados financieros auditados"
+      - name: "Fiscal y Financiación Proyectos"
+        headcount: 1
+        responsibilities:
+          - "IVA, ITP, Plusvalía, Sociedades"
+          - "Estructuración deuda por promoción"
+          - "Subrogaciones hipotecarias compradores"
+    key_processes:
+      - "Cierre mensual (día 5 hábil)"
+      - "Previsión tesorería semanal (viernes)"
+      - "Comité de riesgos financiero (mensual)"
+    kpis:
+      - "Días de tesorería (runway)"
+      - "Coste medio deuda ponderado"
+      - "Ratio cobertura intereses"
+      - "Precisión previsión caja vs real (%)"
+
+  - id: promociones
+    name: "Promociones (Operaciones)"
+    head: "elena-ruiz"
+    description: "Ciclo completo promociones: suelo, licencias, proyecto, obra, entrega, postventa"
+    headcount: 18
+    budget_eur_year: 1850000
+    sub_areas:
+      - name: "Adquisición y Suelo"
+        headcount: 2
+        responsibilities:
+          - "Origination y due diligence suelo"
+          - "Negociación opciones/compra"
+          - "Gestión planeamiento y licencias"
+      - name: "Jefes de Proyecto (6)"
+        headcount: 6
+        responsibilities:
+          - "Gestión integral promoción asignada"
+          - "Coordinación proyectistas/constructoras"
+          - "Control plazos, costes, calidad"
+          - "Entrega y postventa"
+      - name: "Project Management Office (PMO)"
+        headcount: 3
+        responsibilities:
+          - "Metodología, plantillas, herramientas"
+          - "Consolidación reporting promociones"
+          - "Gestión riesgos transversal"
+          - "Compras y contratos marco"
+      - name: "Postventa y Atención Cliente"
+        headcount: 3
+        responsibilities:
+          - "Gestión incidencias 2 años (LOE)"
+          - "Garantía decenal (10 años)"
+          - "Encuestas satisfacción (NPS)"
+    key_processes:
+      - "Comité de promociones (quincenal)"
+      - "Hito: Opción suelo → Due Diligence → Compra"
+      - "Hito: Licencia → Contratación → Inicio obra"
+      - "Hito: Obra → Recepción → Entrega → Postventa"
+    kpis:
+      - "Plazo medio licencia (meses)"
+      - "Desviación presupuesto vs adjudicación (%)"
+      - "Desviación plazo vs planning inicial (meses)"
+      - "NPS postventa (0-100)"
+      - "Incidencias abiertas >30 días"
+
+  - id: juridico
+    name: "Jurídico y Compliance"
+    head: "carlos-martinez"
+    description: "Contratos, urbanismo, compraventas, litigios, compliance, protección datos, secretaría junta"
+    headcount: 3
+    budget_eur_year: 420000
+    sub_areas:
+      - name: "Urbanismo y Suelo"
+        headcount: 1
+        responsibilities:
+          - "Contratos compraventa/opción suelo"
+          - "Licencias y planeamiento"
+          - "Convenios urbanísticos"
+      - name: "Promoción y Comercial"
+        headcount: 1
+        responsibilities:
+          - "Minutas compraventa y anexos"
+          - "Subrogaciones y financiación comprador"
+          - "Modificaciones y extras"
+      - name: "Corporativo, Compliance y Litigios"
+        headcount: 1
+        responsibilities:
+          - "Secretaría junta/socios"
+          - "Compliance (blanqueo, canal ético)"
+          - "Protección de datos (DPO)"
+          - "Gestión litigios y reclamaciones"
+    key_processes:
+      - "Due diligence legal suelo (checklist 40 puntos)"
+      - "Revisión contratos marco (anual)"
+      - "Auditoría compliance (anual)"
+    kpis:
+      - "Tiempo revisión contratos (días)"
+      - "Litigios activos / promociones entregadas"
+      - "Incumplimientos compliance (0 target)"
+
+  - id: comercial-marketing
+    name: "Comercial y Marketing"
+    head: "laura-garcia"
+    description: "Estrategia comercial, pricing, marketing digital, CRM, atención cliente, portal web, branding"
+    headcount: 8
+    budget_eur_year: 950000
+    sub_areas:
+      - name: "Ventas y Atención Comercial"
+        headcount: 4
+        responsibilities:
+          - "Equipo comercial (in-house + externo)"
+          - "Visitas, reservas, firmas"
+          - "Portal cliente y personalización"
+      - name: "Marketing Digital y Branding"
+        headcount: 2
+        responsibilities:
+          - "Campañas SEM, Social, Portales"
+          - "Web corporativa y landings promociones"
+          - "Branding y comunicación"
+      - name: "CRM y Operaciones Comerciales"
+        headcount: 2
+        responsibilities:
+          - "HubSpot: leads, funnel, automatizaciones"
+          - "Reporting comercial semanal"
+          - "Pricing y tabla precios"
+    key_processes:
+      - "Lanzamiento comercial (fases: VIP, lista espera, público)"
+      - "Gestión leads: captación → calificación → visita → reserva → firma"
+      - "Revisión pricing mensual (competencia, absorción)"
+    kpis:
+      - "Leads/mes por canal"
+      - "Conversión lead → visita → reserva → firma (%)"
+      - "CAC (Coste Adquisición Cliente)"
+      - "Velocidad de venta (unidades/mes)"
+      - "Stock remanente >12 meses post-licencia"
+
+  - id: tecnico-producto
+    name: "Técnico / Producto"
+    head: "pablo-ortiz"
+    description: "Definición producto, calidades, control calidad, sostenibilidad, innovación constructiva"
+    headcount: 4
+    budget_eur_year: 380000
+    sub_areas:
+      - name: "Definición de Producto y Calidades"
+        headcount: 2
+        responsibilities:
+          - "Memoria de calidades base"
+          - "Catálogo opciones/extras"
+          - "Tipologías y distribuciones"
+      - name: "Control Calidad y Sostenibilidad"
+        headcount: 2
+        responsibilities:
+          - "Planes de control calidad por promoción"
+          - "Recepción materiales y partidas"
+          - "Certificación energética (DB-HE)"
+          - "BREEAM / sostenibilidad"
+    key_processes:
+      - "Definición producto (fase proyecto básico)"
+      - "Aprobación equivalencias materiales"
+      - "Auditorías calidad obra (quincenales)"
+      - "Certificación final energética"
+    kpis:
+      - "Calificación energética media (A-G)"
+      - "Incidencias calidad / 100 uds entregadas"
+      - "% viviendas con calificación A/B"
+      - "Coste extras no presupuestados / promo"
+
+  - id: administracion-rrhh
+    name: "Administración y RRHH"
+    head: "maria-lopez"
+    description: "Admin general, RRHH, IT, proveedores corporativos, contabilidad analítica, oficina"
+    headcount: 4
+    budget_eur_year: 320000
+    sub_areas:
+      - name: "Administración y Contabilidad Analítica"
+        headcount: 2
+        responsibilities:
+          - "Facturación proveedores / imputación promociones"
+          - "Conciliaciones bancarias"
+          - "Contabilidad analítica por centro de coste"
+      - name: "RRHH y Cultura"
+        headcount: 1
+        responsibilities:
+          - "Selección, onboarding, formación"
+          - "Nóminas, variables, beneficios"
+          - "Cultura, clima, eventos"
+      - name: "IT y Sistemas"
+        headcount: 1
+        responsibilities:
+          - "ERP (contabilidad, compras, tesorería)"
+          - "CRM (HubSpot), BI (Power BI)"
+          - "Infraestructura, seguridad, backups"
+    key_processes:
+      - "Cierre contable analítico (día 7 hábil)"
+      - "Ciclo evaluación desempeño (semestral)"
+      - "Gestión proveedores corporativos"
+    kpis:
+      - "Precisión imputación costes promoción (%)"
+      - "Rotación voluntaria (%)"
+      - "eNPS (empleados)"
+      - "Disponibilidad sistemas críticos (%)"

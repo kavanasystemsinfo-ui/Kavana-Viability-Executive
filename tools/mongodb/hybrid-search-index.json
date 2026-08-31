@@ -1,0 +1,37 @@
+{
+  "name": "hybrid_search_index",
+  "type": "search",
+  "definition": {
+    "mappings": {
+      "dynamic": false,
+      "fields": {
+        "content": {
+          "type": "string",
+          "analyzer": "lucene.standard"
+        },
+        "title": {
+          "type": "string",
+          "analyzer": "lucene.standard"
+        },
+        "companyId": {
+          "type": "token"
+        },
+        "source": {
+          "type": "token"
+        },
+        "metadata.tags": {
+          "type": "token"
+        },
+        "metadata.department": {
+          "type": "token"
+        },
+        "metadata.document_type": {
+          "type": "token"
+        },
+        "createdAt": {
+          "type": "date"
+        }
+      }
+    }
+  }
+}

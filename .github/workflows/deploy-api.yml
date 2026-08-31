@@ -1,0 +1,24 @@
+# Despliegue de apps/api en Render (produccion) mediante deploy hook.
+#
+# Render no requiere credenciales en GitHub: el deploy hook es una URL firmada
+# que Render expone en Settings > Deploy Hooks del servicio, y cada POST a esa
+# URL dispara un deploy del ultimo commit de la rama configurada (master).
+# El servicio se crea a partir de render.yaml (ver README-ci.md, pasos 5 y 6).
+name: Deploy API (Render)
+
+on:
+  push:
+    branches: [master]
+
+concurrency:
+  group: deploy-api
+  cancel-in-progress: false
+
+jobs:
+  deploy-api:
+    name: Disparar deploy en Render
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Llamar al deploy hook de Render
+        run: curl -fsS -X POST "${{ secrets.RENDER_DEPLOY_HOOK_URL }}"

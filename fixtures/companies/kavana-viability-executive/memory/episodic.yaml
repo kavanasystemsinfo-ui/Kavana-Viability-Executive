@@ -1,0 +1,139 @@
+episodic_memory:
+  - id: mem-2025-09-15-pricing-decision
+    date: "2025-09-15"
+    type: "decision"
+    title: "Decisión pricing remanente La Marina + lanzamiento Los Naranjos"
+    participants: ["jorge-adan", "andres-vidal", "laura-garcia", "elena-ruiz"]
+    scenario_ref: "mediterranea_001"
+    decision: "opcion_c"
+    summary: |
+      Aprobada opción C: campaña "Todo incluido" (gastos + muebles cocina + plaza garaje) 
+      sin bajar precio catálogo. Coste 748k€ asumible. Target: 4 reservas/semana. 
+      Revisión a 4 semanas (13 oct). Si no tracción → activar opción B solo 4 uds La Marina.
+    rationale: "Protege ancla precios Los Naranjos, diferencia vs competencia, evita riesgo jurídico."
+    outcome: "Pendiente ejecución (inicio campaña 22 sep)"
+    tags: ["pricing", "comercial", "decision-ejecutiva"]
+
+  - id: mem-2025-09-10-financiacion-pipeline
+    date: "2025-09-10"
+    type: "decision"
+    title: "Estructuración financiación pipeline 2026 (45M€)"
+    participants: ["jorge-adan", "andres-vidal", "carlos-martinez"]
+    scenario_ref: "mediterranea_002"
+    decision: "opcion_b"
+    summary: |
+      Aprobada opción B: Senior banco 50% + Mezzanine fondo privado 25% + Equity 25%. 
+      Cierra Mar Azul y Cala Serena sin pre-ventas 30%. Coste blendado ~6%. 
+      Libera 5,3M€ caja para opciones suelo 2026.
+    rationale: "Velocidad y certidumbre para Mar Azul/Cala Serena > coste extra 500k€/año vs opción A."
+    outcome: "Mandato a Andrés: cerrar con 2 fondos + 2 bancos antes 31 oct. Negociar covenants flexibles."
+    tags: ["financiacion", "deuda", "pipeline-2026", "decision-ejecutiva"]
+
+  - id: mem-2025-09-20-licencia-los-naranjos
+    date: "2025-09-20"
+    type: "decision"
+    title: "Estrategia licencia Los Naranjos: recurso + modificación paralela"
+    participants: ["jorge-adan", "carlos-martinez", "elena-ruiz", "pablo-ortiz"]
+    scenario_ref: "mediterranea_003"
+    decision: "opcion_c"
+    summary: |
+      Recurso contencioso + modificación proyecto PB+4 en paralelo. Coste 100k€. 
+      Si cautelar favorable (30%) → 84 uds. Si denegada (70%) → licencia 68 uds en 2 sem.
+      Lanzamiento comercial 68 uds preparado para activar inmediato.
+    rationale: "Real option value: 350k€ upside esperado vs opción B. Señal equilibrada."
+    outcome: "Esta semana: presentar recurso (Carlos) + modificar proyecto (Pablo, 2 sem)."
+    tags: ["licencias", "urbanismo", "time-to-market", "decision-ejecutiva"]
+
+  - id: mem-2025-08-28-junta-trimestral
+    date: "2025-08-28"
+    type: "meeting"
+    title: "Junta Directiva Trimestral Q2 2025"
+    participants: ["jorge-adan", "andres-vidal", "elena-ruiz", "carlos-martinez", "laura-garcia", "pablo-ortiz", "maria-lopez"]
+    summary: |
+      Aprobadas cuentas Q2 2025: Revenue 9,8M€, EBITDA 2,1M€, Caja 4,7M€. 
+      Ratificada estrategia 3 lanzamientos 2026. Aprobada línea crédito revolving 5M€ (CaixaBank) 
+      para caja puente opciones suelo. Presentado proyecto "Cuadro Mando Ejecutivo IA" (este proyecto) 
+      como iniciativa digital 2025. Próxima junta: 27 nov 2025.
+    decisions:
+      - "Aprobar cuentas Q2"
+      - "Ratificar pipeline 2026"
+      - "Aprobar crédito revolving 5M€"
+      - "Validar proyecto IA ejecutivo (presupuesto 120k€)"
+    tags: ["junta", "trimestral", "gobernanza"]
+
+  - id: mem-2025-07-15-compra-suelo-cala-serena
+    date: "2025-07-15"
+    type: "decision"
+    title: "Ejercicio opción compra suelo Cala Serena (Mallorca)"
+    participants: ["jorge-adan", "andres-vidal", "carlos-martinez", "elena-ruiz"]
+    summary: |
+      Ejercida opción compra suelo Cala Serena (9,5M€) tras due diligence favorable (85% completada). 
+      Pendiente: informe ambiental fase 2 (riesgo bajo), confirmación planeamiento sector. 
+      Financiación: estructura mezzanine fondo privado (ver mediterranea_002). 
+      Objetivo: escrituras oct 2025, proyecto nov 2025, licencia jun 2026.
+    rationale: "Suelo prime Mallorca, margen proyectado 21,8%, diversificación geográfica."
+    outcome: "En proceso: DD ambiental fase 2, negociación financiación."
+    tags: ["suelo", "adquisicion", "mallorca", "pipeline-2026"]
+
+  - id: mem-2025-06-01-lanzamiento-mirador
+    date: "2025-06-01"
+    type: "milestone"
+    title: "Lanzamiento comercial Mirador del Mar (Valencia)"
+    participants: ["laura-garcia", "jorge-adan", "elena-ruiz"]
+    summary: |
+      Lanzamiento oficial Mirador del Mar: 72 uds, precio desde 265k€. 
+      Campaña: "Vista al mar, vida en la ciudad". 
+      Resultados semana 1: 18 reservas (25% stock), 42 visitas, CAC 5.200€. 
+      Objetivo: 30 reservas pre-licencia (para financiación). 
+      Riesgo: 2 promociones competencia lanzando Q3 2025 misma zona.
+    tags: ["lanzamiento", "comercial", "valencia", "hito"]
+
+  - id: mem-2025-04-15-inicio-la-marina-2
+    date: "2025-04-15"
+    type: "milestone"
+    title: "Inicio obra La Marina Fase 2"
+    participants: ["elena-ruiz", "jorge-adan", "roberto-sanchez-jp"]
+    summary: |
+      Acta de replanteo e inicio obra La Marina Fase 2 (96 uds). 
+      Constructora: Construcciones Martínez Hermanos S.L. (contrato llave en mano 14,8M€). 
+      Plazo: 18 meses (entrega oct 2025). Hitos: estructura mar 2024, cerramiento jul 2024, 
+      acabados mar 2025, LPO sep 2025. Financiación: CaixaBank 13,5M€ (Euribor+1,85%).
+    tags: ["inicio-obra", "castellon", "hito", "la-marina"]
+
+  - id: mem-2024-11-20-compra-suelo-mar-azul
+    date: "2024-11-20"
+    type: "decision"
+    title: "Compra suelo Mar Azul (Valencia)"
+    participants: ["jorge-adan", "andres-vidal", "carlos-martinez", "elena-ruiz"]
+    summary: |
+      Compra suelo Mar Azul: 7,2M€ (12.500 m², edificabilidad 6.800 m²t). 
+      Planeamiento: sector consolidado, licencia estimada mar 2026. 
+      68 uds (2-3 dorm + áticos), precio objetivo 3.650€/m². 
+      Financiación: pendiente (ver mediterranea_002). 
+      Competencia: 2 promociones vecinas (TM, Hispania) lanzan 2025.
+    rationale: "Ubicación prime Valencia, margen 18,4%, diversificación geográfica."
+    tags: ["suelo", "adquisicion", "valencia", "pipeline-2026"]
+
+  - id: mem-2024-09-01-certificacion-energetica
+    date: "2024-09-01"
+    type: "policy"
+    title: "Política certificación energética A/B obligatoria nuevas promociones"
+    participants: ["pablo-ortiz", "jorge-adan", "andres-vidal", "elena-ruiz"]
+    summary: |
+      Aprobada política: todas las promociones nuevas (licencia post-2024) target certificación 
+      energética A o B (DB-HE). Implicaciones: aislamiento reforzado, aerotermia, fotovoltaica 
+      autoconsumo, carpintería alta prestación. Sobrecoste estimado 3-4% presupuesto construcción, 
+      compensado por: acceso financiación verde (spread -0,15%), precio venta +2-3%, 
+      diferenciación comercial. Requisito para mezzanine ICO/NextGen (mediterranea_002 opción C).
+    tags: ["sostenibilidad", "certificacion", "politica", "producto"]
+
+  - id: mem-2024-03-15-fundacion
+    date: "2019-03-15"
+    type: "founding"
+    title: "Fundación Kavana Apartaments S.L."
+    participants: ["jorge-adan"]
+    summary: |
+      Constitución sociedad por Jorge Adán (CEO) y 3 socios inversores familiares. 
+      Capital inicial 2M€. Objetivo: promociones residenciales costa mediterránea. 
+      Primera promoción: La Marina Fase 1 (entregada 2022, 88 uds, margen 18%).
+    tags: ["fundacion", "origen", "historia"]

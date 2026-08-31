@@ -1,0 +1,21 @@
+{
+  "name": "kavana-viability-executive-mongodb-tools",
+  "version": "1.0.0",
+  "description": "MongoDB Atlas setup and seed scripts for Kavana Viability Executive",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "setup": "mongosh \"$MONGODB_URI\" --file setup.js",
+    "seed": "mongosh \"$MONGODB_URI\" --file seed.js",
+    "create-indexes": "mongosh \"$MONGODB_URI\" --eval \"db.runCommand({createIndexes: 'knowledge_chunks', indexes: [require('./vector-search-index.json')]})\""
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

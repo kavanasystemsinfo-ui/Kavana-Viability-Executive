@@ -1,0 +1,53 @@
+# Despliegue de apps/web en Vercel (produccion).
+#
+# Se dispara en cada push a master. El gate real de "solo publicar con CI verde"
+# es la branch protection de GitHub: master protegida con el check "ci"
+# obligatorio. Si CI falla, el push no llega a master y este workflow no se
+# dispara. Sin branch protection, el deploy se lanzaria aunque CI fallase, por
+# eso el paso 2 del README-ci.md incluye crear la regla de proteccion.
+#
+# Se usa el CLI de Vercel (no la accion vercel/actions) porque el flujo
+# pull/build/deploy --prebuilt es el patron que Vercel documenta oficialmente
+# para GitHub Actions (guia publicada el 23/07/2026) y porque el repo
+# vercel/actions solo contiene acciones para Docker, no de despliegue.
+name: Deploy Web (Vercel)
+
+on:
+  push:
+    branches: [master]
+
+concurrency:
+  group: deploy-web
+  cancel-in-progress: false
+
+jobs:
+  deploy-web:
+    name: Desplegar web en Vercel
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: npm
+
+      - name: Instalar Vercel CLI
+        run: npm install -g vercel@latest
+
+      - name: Pull de la configuracion del proyecto Vercel
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      # vercel build ejecuta el installCommand (npm ci) y el buildCommand
+      # (npx nx build web) definidos en vercel.json, y genera .vercel/output:
+      # estaticos del browser y el SSR (carpeta server) ya convertidos.
+      - name: Build del proyecto (npx nx build web)
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      # --prebuilt publica solo .vercel/output: Vercel no vuelve a construir.
+      - name: Deploy a produccion
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}

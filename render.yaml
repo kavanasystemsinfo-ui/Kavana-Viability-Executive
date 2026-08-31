@@ -1,0 +1,31 @@
+# Blueprint de Render para la API de Kavana Viability Executive.
+#
+# Importacion: Render Dashboard > New > Blueprint > conectar el repositorio.
+# Render lee este archivo, crea el servicio y pide una sola vez el valor de las
+# variables con "sync: false" (los secretos nunca se guardan en el repositorio).
+#
+# Notas:
+# - buildCommand y startCommand se ejecutan desde la raiz del repositorio.
+# - El bundle real se genera en dist/apps/api/main.js (verificado con
+#   "nx build api": webpack compila a dist/apps/api/main.js, con su
+#   package.json y lockfile propios generados por Nx).
+# - plan free se duerme tras 15 minutos sin trafico; para produccion real con
+#   webhooks de Clerk conviene subir a starter (7 USD al mes).
+services:
+  - type: web
+    name: kavana-viability-executive-api
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npx nx build api
+    startCommand: node dist/apps/api/main.js
+    envVars:
+      - key: CLERK_PUBLISHABLE_KEY
+        sync: false
+      - key: CLERK_SECRET_KEY
+        sync: false
+      - key: CLERK_WEBHOOK_SECRET
+        sync: false
+      - key: CLERK_API_URL
+        value: https://api.clerk.com
+      - key: CORS_ORIGINS
+        sync: false

@@ -1,0 +1,311 @@
+promotions:
+  - id: promo-la-marina-2
+    name: "La Marina - Fase 2"
+    location:
+      city: "Castellón de la Plana"
+      province: "Castellón"
+      coordinates: [-0.0341, 39.9862]
+      address: "C/ Marina d'Or, s/n"
+    status: "Ejecución"
+    progress_pct: 65
+    start_date: "2023-04-15"
+    estimated_delivery: "2025-10-31"
+    units_total: 96
+    units_sold: 82
+    units_available: 14
+    unit_types:
+      - type: "2 dorm / 1 baño"
+        count: 24
+        avg_m2: 72
+        price_from_eur: 185000
+      - type: "3 dorm / 2 baños"
+        count: 56
+        avg_m2: 92
+        price_from_eur: 235000
+      - type: "4 dorm / 2 baños"
+        count: 16
+        avg_m2: 115
+        price_from_eur: 295000
+    financials:
+      land_cost_eur: 4200000
+      construction_budget_eur: 14800000
+      construction_spent_eur: 9620000
+      total_budget_eur: 21500000
+      revenue_contracted_eur: 19200000
+      projected_margin_eur: 3200000
+      projected_margin_pct: 14.9
+    financing:
+      bank: "CaixaBank"
+      loan_amount_eur: 13500000
+      drawn_eur: 8800000
+      interest_rate: "Euribor + 1.85%"
+      maturity: "2026-12-31"
+    jefe_proyecto: "jp-la-marina"
+    critical_path:
+      - "Estructura finalizada (OK - Ene 2024)"
+      - "Cerramiento fachada (OK - Abr 2024)"
+      - "Instalaciones MEP (En curso - 70%)"
+      - "Acabados interiores (Pendiente - Sep 2024)"
+      - "Urbanización exterior (Pendiente - Jun 2025)"
+      - "Licencia primera ocupación (Objetivo - Sep 2025)"
+    risks:
+      - "Retraso suministro carpintería exterior (proveedor único)"
+      - "Modificaciones compradores fase acabados"
+
+  - id: promo-mirador-mar
+    name: "Mirador del Mar"
+    location:
+      city: "Valencia"
+      province: "Valencia"
+      coordinates: [-0.3763, 39.4699]
+      address: "Av. del Mediterrani, 45"
+    status: "Ejecución"
+    progress_pct: 40
+    start_date: "2024-02-01"
+    estimated_delivery: "2026-03-31"
+    units_total: 72
+    units_sold: 48
+    units_available: 24
+    unit_types:
+      - type: "2 dorm / 2 baños"
+        count: 18
+        avg_m2: 85
+        price_from_eur: 265000
+      - type: "3 dorm / 2 baños"
+        count: 42
+        avg_m2: 105
+        price_from_eur: 325000
+      - type: "Ático 3 dorm / 3 baños"
+        count: 12
+        avg_m2: 140
+        price_from_eur: 485000
+    financials:
+      land_cost_eur: 5800000
+      construction_budget_eur: 16200000
+      construction_spent_eur: 6480000
+      total_budget_eur: 24800000
+      revenue_contracted_eur: 18500000
+      projected_margin_eur: 4100000
+      projected_margin_pct: 16.5
+    financing:
+      bank: "Banco Sabadell"
+      loan_amount_eur: 15500000
+      drawn_eur: 6200000
+      interest_rate: "Euribor + 2.10%"
+      maturity: "2027-06-30"
+    jefe_proyecto: "jp-mirador"
+    critical_path:
+      - "Excavación y cimentación (OK - May 2024)"
+      - "Estructura planta baja-3 (En curso - 55%)"
+      - "Estructura planta 4-cubierta (Pendiente - Nov 2024)"
+      - "Fachada ventilada (Pendiente - Feb 2025)"
+      - "Instalaciones y acabados (Pendiente - Oct 2025)"
+    risks:
+      - "Afectación servicios urbanos (desvío red eléctrica)"
+      - "Condiciones geotécnicas imprevistas (arcillas expansivas)"
+
+  - id: promo-los-naranjos
+    name: "Los Naranjos"
+    location:
+      city: "Castellón de la Plana"
+      province: "Castellón"
+      coordinates: [-0.0412, 39.9912]
+      address: "C/ Naranjos, 12-14"
+    status: "Licencia / Pre-comercialización"
+    progress_pct: 5
+    start_date: "2025-01-15"
+    estimated_delivery: "2027-06-30"
+    units_total: 84
+    units_sold: 12
+    units_available: 72
+    unit_types:
+      - type: "2 dorm / 2 baños"
+        count: 28
+        avg_m2: 78
+        price_from_eur: 215000
+      - type: "3 dorm / 2 baños"
+        count: 48
+        avg_m2: 98
+        price_from_eur: 275000
+      - type: "3 dorm / 2 baños + terraza"
+        count: 8
+        avg_m2: 110
+        price_from_eur: 315000
+    financials:
+      land_cost_eur: 3600000
+      construction_budget_eur: 15500000
+      construction_spent_eur: 310000
+      total_budget_eur: 21800000
+      revenue_contracted_eur: 3200000
+      projected_margin_eur: 3800000
+      projected_margin_pct: 17.4
+    financing:
+      bank: "Pendiente formalización"
+      loan_amount_eur: 14000000
+      drawn_eur: 0
+      interest_rate: "Euribor + 1.95% (estimado)"
+      maturity: "2028-06-30"
+    jefe_proyecto: "jp-los-naranjos"
+    critical_path:
+      - "Licencia obra (Objetivo - Oct 2025)"
+      - "Contratación constructora (Objetivo - Nov 2025)"
+      - "Inicio obra (Objetivo - Ene 2026)"
+      - "Estructura (Ene-Abr 2026)"
+      - "Cerramiento y acabados (May-Dic 2026)"
+    risks:
+      - "Licencia: alegaciones vecinales (altura, densidad)"
+      - "Coste construcción: revisión precios 2026"
+
+  - id: promo-mar-azul
+    name: "Mar Azul"
+    location:
+      city: "Valencia"
+      province: "Valencia"
+      coordinates: [-0.3124, 39.4456]
+      address: "Passeig Marítim, 78"
+    status: "Proyecto / Licencia"
+    progress_pct: 2
+    start_date: "2025-03-01"
+    estimated_delivery: "2027-12-31"
+    units_total: 68
+    units_sold: 0
+    units_available: 68
+    unit_types:
+      - type: "2 dorm / 2 baños"
+        count: 20
+        avg_m2: 82
+        price_from_eur: 295000
+      - type: "3 dorm / 2 baños"
+        count: 36
+        avg_m2: 102
+        price_from_eur: 365000
+      - type: "Ático 3 dorm / 2 baños"
+        count: 12
+        avg_m2: 135
+        price_from_eur: 525000
+    financials:
+      land_cost_eur: 7200000
+      construction_budget_eur: 14800000
+      construction_spent_eur: 180000
+      total_budget_eur: 24500000
+      revenue_contracted_eur: 0
+      projected_margin_eur: 4500000
+      projected_margin_pct: 18.4
+    financing:
+      bank: "Pendiente"
+      loan_amount_eur: 15000000
+      drawn_eur: 0
+      interest_rate: "Euribor + 2.00% (estimado)"
+      maturity: "2028-12-31"
+    jefe_proyecto: "jp-mar-azul"
+    critical_path:
+      - "Proyecto básico y ejecución (En curso)"
+      - "Solicitud licencia (Objetivo - Sep 2025)"
+      - "Licencia obra (Objetivo - Mar 2026)"
+      - "Contratación e inicio (Objetivo - May 2026)"
+    risks:
+      - "Planeamiento: sectorización pendiente (retraso 6-9 meses posible)"
+      - "Competencia: 2 promociones vecinas lanzando 2025"
+
+  - id: promo-cala-serena
+    name: "Cala Serena"
+    location:
+      city: "Palma de Mallorca"
+      province: "Baleares"
+      coordinates: [2.6502, 39.5696]
+      address: "C/ Cala Serena, Urbanización Cala Blava"
+    status: "Suelo / Estudio viabilidad"
+    progress_pct: 1
+    start_date: "2025-06-01"
+    estimated_delivery: "2028-09-30"
+    units_total: 64
+    units_sold: 0
+    units_available: 64
+    unit_types:
+      - type: "2 dorm / 2 baños"
+        count: 16
+        avg_m2: 88
+        price_from_eur: 385000
+      - type: "3 dorm / 2 baños"
+        count: 32
+        avg_m2: 112
+        price_from_eur: 485000
+      - type: "Ático 3 dorm / 3 baños"
+        count: 16
+        avg_m2: 155
+        price_from_eur: 725000
+    financials:
+      land_cost_eur: 9500000
+      construction_budget_eur: 18200000
+      construction_spent_eur: 50000
+      total_budget_eur: 31200000
+      revenue_contracted_eur: 0
+      projected_margin_eur: 6800000
+      projected_margin_pct: 21.8
+    financing:
+      bank: "Pendiente"
+      loan_amount_eur: 20000000
+      drawn_eur: 0
+      interest_rate: "Euribor + 2.25% (estimado)"
+      maturity: "2029-09-30"
+    jefe_proyecto: "jp-cala-serena"
+    critical_path:
+      - "Due diligence suelo (En curso - 60%)"
+      - "Ejercicio opción compra (Objetivo - Oct 2025)"
+      - "Proyecto y licencia (Nov 2025 - Jun 2026)"
+      - "Financiación y contratación (Jul-Sep 2026)"
+    risks:
+      - "Suelo: opción expira Dic 2025, due diligence ambiental pendiente"
+      - "Mallorca: estacionalidad mano de obra, costes +15-20% vs península"
+      - "Cliente: 60% segunda residencia / inversión, sensibilidad tipos"
+
+  - id: promo-sol-levant
+    name: "Sol Levant"
+    location:
+      city: "Alicante"
+      province: "Alicante"
+      coordinates: [-0.4838, 38.3452]
+      address: "Playa San Juan, Sector 4"
+    status: "Opción suelo / Due diligence"
+    progress_pct: 0
+    start_date: "2025-09-01"
+    estimated_delivery: "2029-03-31"
+    units_total: 58
+    units_sold: 0
+    units_available: 58
+    unit_types:
+      - type: "2 dorm / 2 baños"
+        count: 22
+        avg_m2: 80
+        price_from_eur: 245000
+      - type: "3 dorm / 2 baños"
+        count: 30
+        avg_m2: 96
+        price_from_eur: 295000
+      - type: "Ático 3 dorm / 2 baños"
+        count: 6
+        avg_m2: 125
+        price_from_eur: 425000
+    financials:
+      land_cost_eur: 2800000
+      construction_budget_eur: 12500000
+      construction_spent_eur: 25000
+      total_budget_eur: 17200000
+      revenue_contracted_eur: 0
+      projected_margin_eur: 2900000
+      projected_margin_pct: 16.9
+    financing:
+      bank: "Pendiente"
+      loan_amount_eur: 11000000
+      drawn_eur: 0
+      interest_rate: "Euribor + 2.15% (estimado)"
+      maturity: "2029-09-30"
+    jefe_proyecto: "jp-sol-levant"
+    critical_path:
+      - "Due diligence completa (Objetivo - Nov 2025)"
+      - "Ejercicio opción (Objetivo - Dic 2025)"
+      - "Proyecto y licencia (2026)"
+    risks:
+      - "Opción suelo: vendedor particular, negociación compleja"
+      - "Sector: pendiente plan parcial (incertidumbre plazos)"
+      - "Demanda: zona muy dependiente cliente nacional vacacional"

@@ -1,0 +1,98 @@
+id: kavana-apartaments
+name: "Kavana Apartaments"
+legal_name: "Kavana Apartaments S.L."
+tagline: "Promoviendo hogares, construyendo futuro en el Mediterráneo"
+description: |
+  Kavana Apartaments es una promotora inmobiliaria residencial con sede en Castellón de la Plana, 
+  especializada en desarrollos de vivienda nueva en la costa mediterránea (Castellón, Valencia, 
+  Alicante y Baleares). Fundada en 2019, combina rigor financiero, excelencia constructiva y 
+  atención al cliente para entregar hogares de calidad en plazos comprometidos.
+
+mission: |
+  Desarrollar promociones inmobiliarias residenciales de alta calidad en el arco mediterráneo,
+  garantizando rentabilidad sostenida para los socios, seguridad jurídica para los compradores
+  y excelencia constructiva en cada vivienda entregada.
+
+vision: |
+  Ser la promotora de referencia en la Comunidad Valenciana y Baleares para 2028, reconocida
+  por su transparencia, cumplimiento de plazos y calidad de producto, con una cartera de 15+
+  promociones activas y 500+ viviendas entregadas al año.
+
+values:
+  - "Rigor financiero: cada decisión pasa por el filtro de viabilidad económica"
+  - "Transparencia total: información clara a socios, bancos y compradores"
+  - "Compromiso de plazo: la fecha de entrega es una promesa, no una estimación"
+  - "Calidad constructiva: materiales y acabados que perduran"
+  - "Cercanía mediterránea: trato directo, accesible y humano"
+
+stage: "Growth / Established"
+industry: "Residential Real Estate Development"
+headcount: 42
+arr_eur: 18500000
+monthly_burn_eur: 720000
+runway_months: 25
+
+locations:
+  headquarters:
+    city: "Castellón de la Plana"
+    province: "Castellón"
+    autonomous_community: "Comunitat Valenciana"
+    country: "España"
+    address: "Av. del Mar, 14, 12003 Castelló de la Plana"
+  delegations:
+    - city: "Valencia"
+      province: "Valencia"
+      autonomous_community: "Comunitat Valenciana"
+    - city: "Alicante"
+      province: "Alicante"
+      autonomous_community: "Comunitat Valenciana"
+    - city: "Palma de Mallorca"
+      province: "Baleares"
+      autonomous_community: "Illes Balears"
+
+key_metrics:
+  promotions_active: 6
+  units_under_construction: 384
+  units_delivered_2024: 142
+  units_delivered_2025_ytd: 89
+  presales_rate_pct: 78.5
+  avg_price_m2_eur: 2850
+  gross_margin_pct: 22.3
+  net_margin_pct: 14.7
+  land_bank_m2: 185000
+  land_bank_value_eur: 42000000
+
+competitors:
+  - name: "Grupo Bertolín"
+    type: "Regional leader"
+    strength: "Cartera de suelo, relación con ayuntamientos"
+  - name: "TM Grupo Inmobiliario"
+    type: "National player"
+    strength: "Volumen, marca, financiación"
+  - name: "Hispania Homes"
+    type: "Costa Blanca specialist"
+    strength: "Producto vacacional, cliente internacional"
+  - name: "Promociones Mediterráneas"
+    type: "Local competitor"
+    strength: "Precio agresivo, velocidad"
+
+strategic_priorities_2025:
+  - "Lanzar 3 nuevas promociones: Los Naranjos (Castellón), Mar Azul (Valencia), Cala Serena (Mallorca)"
+  - "Entregar La Marina (fase 2) y Mirador del Mar antes de Q4 2025"
+  - "Cerrar financiación promociones 2026 (target: 45 M€ crédito promotor)"
+  - "Digitalizar jornada de compra: firma digital, portal cliente, visita virtual"
+  - "Implementar cuadro de mando ejecutivo (este proyecto)"
+
+risk_factors:
+  - "Tipos de interés: impacto en demanda y coste de deuda"
+  - "Costes de construcción: volatilidad materiales (acero, cemento, aluminio)"
+  - "Licencias urbanísticas: retrasos en planeamiento municipal"
+  - "Concentración geográfica: 80% facturación en Castellón/Valencia"
+  - "Dependencia proveedores clave: 3 constructoras = 70% obra"
+
+culture_keywords:
+  - "Equipo pequeño, decisiones rápidas"
+  - "Jefe de proyecto = 'mini-CEO' de su promoción"
+  - "Reunión semanal de dirección (lunes 9h) - sagrada"
+  - "Visita obra quincenal obligatoria para dirección"
+  - "Cultura de 'puertas abiertas' con compradores"

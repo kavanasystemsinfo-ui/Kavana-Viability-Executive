@@ -1,0 +1,10 @@
+node_modules
+dist
+*.log
+*.tsbuildinfo
+coverage
+.vscode
+.idea
+*.md
+!README.md
+.angular

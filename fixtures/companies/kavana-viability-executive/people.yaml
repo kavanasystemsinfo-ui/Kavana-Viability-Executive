@@ -1,0 +1,216 @@
+people:
+  - id: jorge-adan
+    name: "Jorge Adán"
+    role: "CEO / Socio Fundador"
+    email: "jorge.adán@kavana-apartaments.com"
+    phone: "+34 600 123 456"
+    start_date: "2019-03-15"
+    department: "Dirección General"
+    reports_to: null
+    bio: |
+      Fundador y CEO de Kavana Apartaments. 15 años de experiencia en promoción inmobiliaria
+      (Grupo Bertolín, Vía Célere). Ingeniero de Caminos (UPV) + MBA (IESE). 
+      Lidera estrategia, financiación, relaciones institucionales y junta directiva.
+    skills:
+      - "Estrategia corporativa"
+      - "Financiación estructurada"
+      - "Relaciones institucionales"
+      - "Gestión de juntas/consejos"
+    decision_areas:
+      - "Aprobación nuevas promociones (>5M€)"
+      - "Financiación bancaria"
+      - "Nombramientos dirección"
+      - "Estrategia de suelo"
+    communication_style: "Directo, datos-driven, espera respuestas concisas. Valora rigor sobre velocidad."
+
+  - id: andres-vidal
+    name: "Andrés Vidal"
+    role: "Director Financiero (CFO)"
+    email: "andres.vidal@kavana-apartaments.com"
+    phone: "+34 600 234 567"
+    start_date: "2020-01-10"
+    department: "Finanzas"
+    reports_to: "jorge-adan"
+    bio: |
+      CFO desde 2020. Anteriormente controller en TM Grupo Inmobiliario (5 años) y auditor en Deloitte (3 años).
+      AICPA + CPA España. Responsable de reporting, tesorería, financiación promociones, fiscal, 
+      reporting a bancos/socios y compliance.
+    skills:
+      - "Modelado financiero promociones"
+      - "Financiación proyecto (project finance)"
+      - "Fiscalidad inmobiliaria (IVA, ITP, Plusvalía)"
+      - "Reporting bancario (BEI, ICO, entidades privadas)"
+      - "Gestión de tesorería multi-promoción"
+    decision_areas:
+      - "Viabilidad económica nuevas promociones"
+      - "Estructura de deuda por promoción"
+      - "Política de tesorería y caja"
+      - "Cierres mensuales/trimestrales"
+    communication_style: "Preciso, conservador en supuestos, exige trazabilidad numérica. 'Enséname el Excel'."
+
+  - id: elena-ruiz
+    name: "Elena Ruiz"
+    role: "Directora de Promociones (COO)"
+    email: "elena.ruiz@kavana-apartaments.com"
+    phone: "+34 600 345 678"
+    start_date: "2019-06-01"
+    department: "Promociones"
+    reports_to: "jorge-adan"
+    bio: |
+      COO / Directora de Promociones. Arquitecta (ETSAV-UPC) + Master en Gestión de Proyectos (La Salle).
+      12 años gestionando obra residencial. Responsable de todo el ciclo: adquisición suelo, licencias, 
+      proyecto, contratación, ejecución, entrega, postventa. Gestiona 6 jefes de proyecto.
+    skills:
+      - "Gestión integral promociones (suelo-llaves)"
+      - "Licencias urbanísticas y planeamiento"
+      - "Contratación y control constructoras"
+      - "Coordinación seguridad y salud"
+      - "Gestión de modificaciones y extras"
+    decision_areas:
+      - "Selección constructoras (con CFO)"
+      - "Aprobación modificaciones proyecto >50k€"
+      - "Calendarios y hitos críticos"
+      - "Recepción de obras y protocolos entrega"
+    communication_style: "Operativa, orientada a hitos, gestiona por excepciones. '¿Cuál es el camino crítico?'"
+
+  - id: carlos-martinez
+    name: "Carlos Martínez"
+    role: "Director Jurídico (CLO)"
+    email: "carlos.martinez@kavana-apartaments.com"
+    phone: "+34 600 456 789"
+    start_date: "2021-09-15"
+    department: "Jurídico"
+    reports_to: "jorge-adan"
+    bio: |
+      CLO / Director Jurídico. Abogado (ICAV) especializado en urbanismo y derecho inmobiliario.
+      10 años en despacho boutique (Urbanlex) + 3 años in-house en Aedas Homes.
+      Responsable: contratos compraventa suelo, licencias, compraventas viviendas, 
+      litigios, compliance, protección de datos, junta/socios.
+    skills:
+      - "Derecho urbanístico y planeamiento"
+      - "Contratos de promoción y gestión delegada"
+      - "Compraventa viviendas (Ley 38/1999, LOE, CTE)"
+      - "Financiación hipotecaria y subrogaciones"
+      - "Compliance y prevención blanqueo"
+    decision_areas:
+      - "Estructura jurídica adquisiciones suelo"
+      - "Contratos marco constructoras/proveedores"
+      - "Minutas compraventa y anexos"
+      - "Gestión reclamaciones y litigios"
+    communication_style: "Preciso, cita normativa, gestiona riesgos. 'El riesgo jurídico no se asume, se mitiga'."
+
+  - id: laura-garcia
+    name: "Laura García"
+    role: "Directora Comercial y Marketing (CMO)"
+    email: "laura.garcia@kavana-apartaments.com"
+    phone: "+34 600 567 890"
+    start_date: "2020-03-01"
+    department: "Comercial y Marketing"
+    reports_to: "jorge-adan"
+    bio: |
+      CMO. Marketing (ESIC) + Master Digital Business (ISDI). 8 años en marketing inmobiliario 
+      (Neinor, Aedas). Responsable: estrategia comercial, pricing, campañas, portal web, CRM, 
+      atención al cliente, postventa, branding.
+    skills:
+      - "Estrategia pricing y tabla precios"
+      - "Marketing digital inmobiliario (SEM, Social, Portales)"
+      - "CRM y funnel comercial (HubSpot)"
+      - "Customer journey comprador vivienda"
+      - "Marca y posicionamiento"
+    decision_areas:
+      - "Tabla de precios y campañas comerciales"
+      - "Presupuesto marketing por promoción"
+      - "Canales de captación leads"
+      - "Política de personalización/extras"
+    communication_style: "Orientada a conversión, test-and-learn, datos de funnel. '¿Cuál es el CAC y LTV?'"
+
+  - id: pablo-ortiz
+    name: "Pablo Ortiz"
+    role: "Director Técnico / Producto (CPO)"
+    email: "pablo.ortiz@kavana-apartaments.com"
+    phone: "+34 600 678 901"
+    start_date: "2022-01-15"
+    department: "Técnico / Producto"
+    reports_to: "elena-ruiz"
+    bio: |
+      CPO / Director Técnico. Arquitecto Técnico (UPV) + Master Eficiencia Energética.
+      10 años en dirección de obra y control calidad (Dragados, constructoras medianas).
+      Responsable: definición de producto (memoria calidades, tipologías), control calidad obra, 
+      sostenibilidad (BREEAM, certificación energética), I+D materiales, industrialización.
+    skills:
+      - "Definición de producto y memoria calidades"
+      - "Control calidad y recepción materiales"
+      - "Certificación energética y sostenibilidad"
+      - "Industrialización y sistemas constructivos"
+      - "Gestión de modificaciones técnicas"
+    decision_areas:
+      - "Especificaciones técnicas y calidades"
+      - "Aprobación equivalencias materiales"
+      - "Objetivos certificación energética"
+      - "Innovación constructiva"
+    communication_style: "Técnico, normativo (CTE, DB-HE), busca soluciones constructivas eficientes."
+
+  - id: maria-lopez
+    name: "María López"
+    role: "Directora de Administración y RRHH"
+    email: "maria.lopez@kavana-apartaments.com"
+    phone: "+34 600 789 012"
+    start_date: "2019-07-01"
+    department: "Administración y RRHH"
+    reports_to: "andres-vidal"
+    bio: |
+      Responsable de administración general, RRHH, oficina, IT, proveedores generales, facturación,
+      contabilidad analítica por promoción, nóminas, prevención riesgos laborales, formación.
+    skills:
+      - "Contabilidad analítica por centros de coste (promociones)"
+      - "Gestión RRHH y cultura"
+      - "Proveedores y compras corporativas"
+      - "Sistemas de información (ERP, CRM, BI)"
+    decision_areas:
+      - "Políticas RRHH y compensación"
+      - "Proveedores corporativos"
+      - "Sistemas y herramientas"
+    communication_style: "Organizada, procesual, '¿Está en el procedimiento?'"
+
+  - id: jefes-proyecto
+    name: "Jefes de Proyecto (6)"
+    role: "Project Managers - Promociones"
+    department: "Promociones"
+    reports_to: "elena-ruiz"
+    members:
+      - id: jp-la-marina
+        name: "Roberto Sánchez"
+        promotion: "La Marina (Fase 2)"
+        location: "Castellón"
+        units: 96
+        status: "Ejecución (65%)"
+      - id: jp-mirador
+        name: "Ana Torres"
+        promotion: "Mirador del Mar"
+        location: "Valencia"
+        units: 72
+        status: "Ejecución (40%)"
+      - id: jp-los-naranjos
+        name: "Miguel Ángel Ruiz"
+        promotion: "Los Naranjos"
+        location: "Castellón"
+        units: 84
+        status: "Licencia / Pre-comercialización"
+      - id: jp-mar-azul
+        name: "Sara Jiménez"
+        promotion: "Mar Azul"
+        location: "Valencia"
+        units: 68
+        status: "Proyecto / Licencia"
+      - id: jp-cala-serena
+        name: "David Navarro"
+        promotion: "Cala Serena"
+        location: "Mallorca"
+        units: 64
+        status: "Suelo / Estudio viabilidad"
+      - id: jp-sol-levant
+        name: "Cristina Mora"
+        promotion: "Sol Levant"
+        location: "Alicante"
+        units: 58
+        status: "Opción suelo / Due diligence"

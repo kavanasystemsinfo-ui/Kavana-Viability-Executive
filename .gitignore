@@ -1,0 +1,15 @@
+node_modules
+dist
+.env
+.env.local
+.env.*
+!.env.example
+*.log
+coverage
+.angular
+nx-cache
+.vercel
+.nx/
+
+# tsc/Nx build artefacts
+tmp/
