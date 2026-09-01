@@ -2,7 +2,7 @@
 
 **Estado:** ✅ Implementado
 **Fecha:** Agosto 2026
-**Contexto:** tarea 7 del roadmap. El motor de viabilidad (ADR-003, tarea 6) es una librería pura sin I/O; la spec aprobada dejó la persistencia explícitamente para esta tarea. El repo ya traía tooling previo de MongoDB en `tools/mongodb/` (setup/seed para mongosh). Principio KES aplicado: YAGNI (solo las colecciones con consumidor real) y errores explícitos antes que fallbacks silenciosos.
+**Contexto:** tarea 7 del roadmap. El motor de viabilidad (ADR-003, tarea 6) es una librería pura sin I/O; la spec aprobada dejó la persistencia explícitamente para esta tarea. El repo ya traía tooling previo de MongoDB en `tools/mongodb/` (setup/seed para mongosh). Principio KES aplicado: YAGNI (solo las colecciones con consumidor real) y errores explícitos antes que fallbacks silenciosos. La verificación final contra MongoDB Atlas (`bad auth` 8000) está documentada en [ADR-006](ADR-006-mongodb-atlas-bad-auth.md).
 
 ---
 
