@@ -1,13 +1,13 @@
 /**
  * Entorno de la aplicación web.
  *
- * IMPORTANTE: nunca committear claves reales. La publishableKey de Clerk se
- * configura vía variable de entorno en el despliegue; aquí solo hay un
- * placeholder vacío.
+ * IMPORTANTE: la publishableKey de Clerk es PÚBLICA por diseño (viaja en el
+ * bundle del navegador), por eso puede committearse aquí. La secret key de
+ * Clerk jamás va en el frontend ni se commitea.
  */
 export const environment = {
   production: false,
   clerk: {
-    publishableKey: '',
+    publishableKey: 'pk_test_Z3JlYXQtc3VuZmlzaC02MzY5LmNsZXJrLmFjY291bnRzLmRldiQ',
   },
 };
