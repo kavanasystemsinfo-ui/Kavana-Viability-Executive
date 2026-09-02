@@ -4,10 +4,15 @@ import { authGuard } from './auth/auth.guard';
 /**
  * Rutas de la aplicación.
  *
- * Públicas: /login (inicio de sesión) y la landing raíz (no hay ruta: se
- * renderiza desde app.html). Protegidas: /dashboard (authGuard).
+ * Públicas: /login (inicio de sesión). La raíz redirige a /login. Protegidas:
+ * /dashboard (authGuard).
  */
 export const appRoutes: Route[] = [
+  {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
+  },
   {
     path: 'login',
     loadComponent: () => import('./login/login-page').then((m) => m.LoginPageComponent),
@@ -19,6 +24,6 @@ export const appRoutes: Route[] = [
   },
   {
     path: '**',
-    redirectTo: '',
+    redirectTo: 'login',
   },
 ];
