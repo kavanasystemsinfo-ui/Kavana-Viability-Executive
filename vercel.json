@@ -5,7 +5,6 @@
   "buildCommand": "npx nx build web",
   "outputDirectory": "dist/apps/web/browser",
   "rewrites": [
-    { "handle": "filesystem" },
     { "source": "/(.*)", "destination": "/index.csr.html" }
   ]
 }
