@@ -1,8 +1,8 @@
 # Despliegue de apps/web en Vercel (produccion).
 #
-# Se dispara en cada push a master. El gate real de "solo publicar con CI verde"
-# es la branch protection de GitHub: master protegida con el check "ci"
-# obligatorio. Si CI falla, el push no llega a master y este workflow no se
+# Se dispara en cada push a main. El gate real de "solo publicar con CI verde"
+# es la branch protection de GitHub: main protegida con el check "ci"
+# obligatorio. Si CI falla, el push no llega a main y este workflow no se
 # dispara. Sin branch protection, el deploy se lanzaria aunque CI fallase, por
 # eso el paso 2 del README-ci.md incluye crear la regla de proteccion.
 #
@@ -14,7 +14,7 @@ name: Deploy Web (Vercel)
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 concurrency:
   group: deploy-web

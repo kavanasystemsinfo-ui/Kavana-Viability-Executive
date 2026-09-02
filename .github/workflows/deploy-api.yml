@@ -2,13 +2,13 @@
 #
 # Render no requiere credenciales en GitHub: el deploy hook es una URL firmada
 # que Render expone en Settings > Deploy Hooks del servicio, y cada POST a esa
-# URL dispara un deploy del ultimo commit de la rama configurada (master).
+# URL dispara un deploy del ultimo commit de la rama configurada (main).
 # El servicio se crea a partir de render.yaml (ver README-ci.md, pasos 5 y 6).
 name: Deploy API (Render)
 
 on:
   push:
-    branches: [master]
+    branches: [main]
 
 concurrency:
   group: deploy-api
