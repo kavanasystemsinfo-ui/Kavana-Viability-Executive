@@ -1,1 +1,643 @@
-/* You can add global styles to this file, and also import other style files */
+/* Kavana Viability Executive · Design System
+ * Based on ADR-008-dashboard-angular.md
+ *
+ * Estructura (Tailwind 4):
+ *  1. @import "tailwindcss"  →  carga Tailwind
+ *  2. @theme                 →  colores/fuentes custom (Tailwind 4 API)
+ *  3. @layer base            →  resets globales, body, tipografía
+ *  4. :root CSS variables   →  tokens semánticos para componentes
+ *  5. Componentes            →  estilos con var(--…) y utilidades Tailwind
+ *  6. Utilities              →  clases auxiliares
+ *  7. Animaciones            →  keyframes globales
+ *  8. Responsive             →  media queries
+ */
+
+@import "tailwindcss";
+
+/* ============================================================
+ * 2. THEME — colores y tipografía (Tailwind 4 API)
+ *    Estas directivas exponen los tokens como utilidades
+ *    (bg-ink, text-ai, font-sans, etc.).
+ * ============================================================ */
+@theme {
+  --color-bg: #F7F6F2;
+  --color-surface: #FFFFFF;
+  --color-ink: #0F2A4A;
+  --color-ink-hover: #1A3F6B;
+  --color-ink-secondary: #475569;
+  --color-ai: #2563EB;
+  --color-green: #0F766E;
+  --color-amber: #B45309;
+  --color-red: #B91C1C;
+  --color-muted: #475569;
+  --color-subtle: #94A3B8;
+
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* ============================================================
+ * 3. BASE LAYER — tipografía global y resets
+ * ============================================================ */
+@layer base {
+  html, body {
+    height: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ============================================================
+ * 4. CSS VARIABLES — tokens semánticos
+ *    Usados por componentes que no son clases Tailwind.
+ * ============================================================ */
+:root {
+  --bg: #F7F6F2;
+  --surface: #FFFFFF;
+  --ink: #0F2A4A;
+  --ink-hover: #1A3F6B;
+  --ai: #2563EB;
+  --green: #0F766E;
+  --amber: #B45309;
+  --red: #B91C1C;
+  --ink-secondary: #475569;
+  --muted: #475569;
+  --subtle: #94A3B8;
+  --border-soft: rgba(15, 42, 74, 0.08);
+  --border-soft-hover: rgba(15, 42, 74, 0.16);
+  --border-ai-soft: rgba(37, 99, 235, 0.5);
+}
+
+/* ============================================================
+ * 5. COMPONENTES — estilos propios del design system
+ *    Todos usan var(--…) para no depender de @apply/Tailwind.
+ * ============================================================ */
+
+/* --- Buttons --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: 0.375rem;
+  background-color: var(--ink);
+  color: var(--surface);
+  border: 1px solid var(--ink);
+  transition: background-color 150ms ease, border-color 150ms ease;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: var(--ink-hover);
+  border-color: var(--ink-hover);
+}
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btn.ghost {
+  background-color: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border-soft-hover);
+}
+.btn.ghost:hover {
+  background-color: var(--border-soft);
+}
+
+/* --- Pills (status) --- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 9999px;
+}
+.pill.green { background-color: rgba(15, 118, 110, 0.10); color: var(--green); }
+.pill.amber { background-color: rgba(180, 83, 9, 0.10);   color: var(--amber); }
+.pill.red   { background-color: rgba(185, 28, 28, 0.10);   color: var(--red); }
+
+/* --- Cards --- */
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: border-color 150ms ease;
+}
+.card:hover {
+  border-color: var(--border-soft-hover);
+}
+.kpi-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  transition: border-color 150ms ease;
+}
+.kpi-card:hover {
+  border-color: var(--border-soft-hover);
+}
+
+/* --- Section headers --- */
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
+.section-head h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.section-head .meta {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+/* --- Attention cards (dashboard overview) --- */
+.attention-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-left: 4px solid var(--ink);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  cursor: pointer;
+  transition: border-color 150ms ease;
+}
+.attention-card:hover {
+  border-color: var(--border-soft-hover);
+}
+.attention-card.amber { border-left-color: var(--amber); }
+.attention-card.red   { border-left-color: var(--red); }
+
+/* --- Top promotions list --- */
+.top-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(15, 42, 74, 0.04);
+}
+.top-item:last-child { border-bottom: none; }
+.top-item .rank {
+  width: 2rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.top-item .name {
+  flex: 1;
+  font-weight: 500;
+  color: var(--ink);
+}
+.top-item .city {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-right: 0.75rem;
+}
+.top-item .bar {
+  width: 6rem;
+  height: 0.5rem;
+  background-color: var(--border-soft);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-right: 0.75rem;
+}
+.top-item .bar > span {
+  display: block;
+  height: 100%;
+  background-color: var(--ink);
+}
+.top-item .value {
+  text-align: right;
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Timeline --- */
+.timeline-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}
+.timeline-item .when {
+  width: 5rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.timeline-item .dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--ink);
+  margin-top: 0.375rem;
+  flex-shrink: 0;
+}
+.timeline-item .dot.amber { background-color: var(--amber); }
+.timeline-item .dot.green { background-color: var(--green); }
+.timeline-item .body {
+  flex: 1;
+  font-size: 0.875rem;
+  color: var(--ink);
+}
+.timeline-item .who {
+  font-weight: 500;
+}
+
+/* --- Promotion detail --- */
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 1.5rem;
+}
+.detail-hero {
+  background-color: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+.detail-hero .head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.detail-hero h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+.detail-hero .loc {
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.detail-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.detail-kpi .label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.detail-kpi .value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  display: block;
+  font-variant-numeric: tabular-nums;
+}
+.detail-kpi .sub {
+  font-size: 0.875rem;
+  color: var(--muted);
+  display: block;
+  margin-top: 0.25rem;
+}
+.section-block {
+  background-color: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.section-block h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* --- Progress bar (HTML) --- */
+.progress {
+  width: 100%;
+  height: 0.5rem;
+  background-color: var(--border-soft);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+.progress > span {
+  display: block;
+  height: 100%;
+  background-color: var(--ink);
+  transition: width 300ms ease;
+}
+.progress.amber > span { background-color: var(--amber); }
+.progress.green > span { background-color: var(--green); }
+
+/* --- Financial stats --- */
+.fin-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.fin-stat .l {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.fin-stat .v {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--ink);
+  display: block;
+  margin-top: 0.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- Risks list --- */
+.risk-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.risk-item {
+  background-color: rgba(15, 42, 74, 0.02);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+.risk-item .sev {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  padding: 0.125rem 0.5rem;
+  flex-shrink: 0;
+  letter-spacing: 0.05em;
+}
+.risk-item .sev.alto  { background-color: rgba(185, 28, 28, 0.12);  color: var(--red); }
+.risk-item .sev.medio { background-color: rgba(180, 83, 9, 0.12);  color: var(--amber); }
+.risk-item .sev.bajo  { background-color: rgba(15, 118, 110, 0.12); color: var(--green); }
+
+/* --- Critical path --- */
+.path-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.path-item {
+  background-color: rgba(15, 42, 74, 0.02);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+.path-item .dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+.path-item.ok .dot          { background-color: var(--green); }
+.path-item.en-curso .dot    { background-color: var(--amber); }
+.path-item.pendiente .dot   { background-color: var(--subtle); }
+.path-item .when {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* --- AI chat panel --- */
+.chat {
+  background-color: var(--bg);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  min-height: 120px;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.chat .role {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+.chat.user .role { color: var(--ink); }
+.chat.ai   .role { color: var(--ai); }
+.chat.ai {
+  background-color: rgba(37, 99, 235, 0.08);
+  margin-bottom: 0.5rem;
+}
+
+.ai-sources {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.ai-source {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  background-color: rgba(15, 42, 74, 0.02);
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+.ai-source .ico {
+  color: var(--ai);
+  font-weight: 600;
+}
+
+.ai-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.ai-chip {
+  background-color: rgba(15, 42, 74, 0.04);
+  color: var(--ink);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  border: 1px solid rgba(15, 42, 74, 0.10);
+  cursor: pointer;
+}
+.ai-chip:hover {
+  background-color: rgba(15, 42, 74, 0.10);
+}
+
+.chat-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border-soft-hover);
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 150ms ease;
+}
+.chat-input:focus {
+  border-color: var(--border-ai-soft);
+}
+
+/* --- Skeleton loader --- */
+.skeleton {
+  background: linear-gradient(90deg, var(--border-soft) 0%, rgba(15, 42, 74, 0.04) 50%, var(--border-soft) 100%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s linear infinite;
+  height: 1rem;
+  border-radius: 0.25rem;
+}
+
+/* --- Empty state --- */
+.empty {
+  padding: 3rem 0;
+  text-align: center;
+  color: var(--muted);
+}
+.empty .ico {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--muted);
+}
+.empty .title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.empty .sub { font-size: 0.875rem; }
+
+/* --- Tables --- */
+.data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.data-table thead th {
+  position: sticky;
+  top: 0;
+  background-color: var(--bg);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+.data-table tbody td {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--ink);
+  border-bottom: 1px solid var(--border-soft);
+  font-variant-numeric: tabular-nums;
+}
+.data-table tbody tr:hover td {
+  background-color: rgba(15, 42, 74, 0.02);
+}
+.data-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+/* ============================================================
+ * 6. UTILITIES — clases auxiliares
+ * ============================================================ */
+@layer utilities {
+  .text-muted { color: var(--muted); }
+  .text-subtle { color: var(--subtle); }
+  .text-ai { color: var(--ai); }
+  .text-ink { color: var(--ink); }
+  .text-green { color: var(--green); }
+  .text-amber { color: var(--amber); }
+  .text-red { color: var(--red); }
+  .bg-bg { background-color: var(--bg); }
+  .bg-surface { background-color: var(--surface); }
+  .bg-ink { background-color: var(--ink); }
+  .bg-ai { background-color: var(--ai); }
+  .border-soft { border-color: var(--border-soft); }
+}
+
+/* ============================================================
+ * 7. ANIMACIONES
+ * ============================================================ */
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.5; }
+}
+.typing-dot {
+  display: inline-block;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 9999px;
+  background-color: var(--ai);
+  margin: 0 0.1rem;
+  animation: pulse-dot 1.2s ease-in-out infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.15s; }
+.typing-dot:nth-child(3) { animation-delay: 0.30s; }
+
+/* ============================================================
+ * 8. RESPONSIVE
+ * ============================================================ */
+@media (max-width: 900px) {
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+  .detail-kpis {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .shell-content {
+    flex-direction: column;
+  }
+  .main-content {
+    margin-top: 0;
+  }
+  .sidebar {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    height: calc(100vh - 56px);
+    transform: translateX(-100%);
+    z-index: 900;
+    transition: transform 300ms ease;
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}

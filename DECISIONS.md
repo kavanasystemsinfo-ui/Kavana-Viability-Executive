@@ -13,6 +13,7 @@
 | [ADR-005](docs/adr/ADR-005-rebrand-kavana-viability-executive.md) | Rebrand a Kavana Viability Executive + roadmap congelado del satélite Kavana Executive | ✅ Implementado (mergeado en `main`, commit `c372635`) | 31/08/2026 |
 | [ADR-006](docs/adr/ADR-006-mongodb-atlas-bad-auth.md) | Saga MongoDB Atlas `bad auth`: diagnóstico diferencial y causa raíz | ✅ Implementado (verificación de la tarea 7 cerrada) | 31/08/2026 |
 | [ADR-007](docs/adr/ADR-007-directiva-calidad-y-modelo-relacion.md) | Directiva de calidad de reporting y modelo de relación equipo-cliente | ✅ Implementado (directiva adoptada el 31/08/2026) | 31/08/2026 |
+| [ADR-008](docs/adr/ADR-008-dashboard-angular.md) | Dashboard Angular (tarea 10): stack visual, datos, RBAC, chat y server routes | 🚧 Aprobado; fase 1 en implementación | 02/09/2026 |
 
 ## Resumen ejecutivo (una línea por ADR)
 

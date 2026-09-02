@@ -24,7 +24,7 @@
 | 7 | Persistencia MongoDB (Atlas) + endpoints de lectura | ✅ | [ADR-004](docs/adr/ADR-004-persistencia-mongodb.md), [ADR-006](docs/adr/ADR-006-mongodb-atlas-bad-auth.md), `apps/api/src/seed`, 13 tests persistencia; verificado contra Atlas real el 31/08/2026 |
 | 8 | RAG Pipeline (ingesta → embeddings → Atlas Vector Search) | ❌ | Spec pendiente (bloqueada por compromiso de proceso del 31/08/2026) |
 | 9 | Orquestador Executive + agentes PoC (CSO + CFO) con streaming | ❌ | Spec pendiente (bloqueada por compromiso de proceso del 31/08/2026). **NO es frontend** (errata del 30/08 corregida) |
-| 10 | Dashboard Angular (promociones, KPIs, chat widget) | ❌ | Spec pendiente (bloqueada por compromiso de proceso del 31/08/2026) |
+| 10 | Dashboard Angular (promociones, KPIs, chat widget) | 🚧 | Spec ✅ (`docs/specs/dashboard.md`, 02/09/2026) + ADR-008 ✅ (`docs/adr/ADR-008-dashboard-angular.md`). Mockup visual aprobado por Jorge 02/09/2026 (sidebar navy #0F2A4A confirmado). Fase 1 (estructura, design system, ApiService, RBAC, MockChatService, server routes) en implementación vía coding agent; vistas finales en fase 2 tras OK. |
 
 ## Dependencias
 

@@ -14,6 +14,18 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Server,
   },
   {
+    path: 'promotions',
+    renderMode: RenderMode.Server,
+  },
+  {
+    path: 'promotions/:id',
+    renderMode: RenderMode.Server,
+  },
+  {
+    path: 'chat',
+    renderMode: RenderMode.Client, // Endpoint de chat SIEMPRE client-side
+  },
+  {
     path: '**',
     renderMode: RenderMode.Server,
   },
