@@ -82,6 +82,39 @@ describe('ClerkService', () => {
       );
     });
 
+    it('normaliza los claims desde metadata.* (formato actual del template de sesion)', async () => {
+      mockVerifyToken.mockResolvedValue({
+        sub: 'user_3ImCPd9CkIBoHJnJQx2r2e5fLzc',
+        sid: 'sess_1',
+        azp: 'http://localhost:4200',
+        exp: 2000000000,
+        iat: 1999999000,
+        nbf: 1999999000,
+        iss: 'https://clerk.example.com',
+        metadata: {
+          role: 'super_admin',
+          company_id: 'kavana_viability_executive',
+          permissions: ['promotions:read', 'promotions:write', 'viability:run', 'agents:invoke'],
+        },
+      });
+
+      const result = await service.verifyToken('un-token');
+
+      expect(result?.role).toBe('super_admin');
+      expect(result?.company_id).toBe('kavana_viability_executive');
+      expect(result?.permissions).toEqual([
+        'promotions:read',
+        'promotions:write',
+        'viability:run',
+        'agents:invoke',
+      ]);
+      // Los claims estandar del token no se pierden
+      expect(result?.sub).toBe('user_3ImCPd9CkIBoHJnJQx2r2e5fLzc');
+      expect(result?.sid).toBe('sess_1');
+      expect(result?.exp).toBe(2000000000);
+      expect(result?.iss).toBe('https://clerk.example.com');
+    });
+
     it('devuelve null cuando la verificacion falla', async () => {
       mockVerifyToken.mockRejectedValue(new Error('Token expirado'));
 

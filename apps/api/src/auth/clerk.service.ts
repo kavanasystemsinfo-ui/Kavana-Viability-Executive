@@ -7,6 +7,7 @@ import { Webhook } from 'svix';
 import type { ClerkConfig } from './clerk.config';
 import { clerkConfig } from './clerk.config';
 import { DEFAULT_COMPANY_ID } from './company-id.constants';
+import { extractClaims } from './claims';
 
 export interface ClerkPublicMetadata {
   role?: string;
@@ -93,7 +94,17 @@ export class ClerkService implements OnModuleInit {
         apiUrl: this.config.apiUrl,
         ...this.config.verifyOptions,
       });
-      return verified as VerifiedToken;
+      // Normaliza los claims personalizados: el template de sesión actual los
+      // inyecta en metadata.* y el alternativo en la raíz. Solo se añaden al
+      // payload verificado los claims realmente presentes, para no alterar el
+      // shape del token cuando no existen.
+      const claims = extractClaims(verified as Record<string, unknown>);
+      return {
+        ...verified,
+        ...(claims.role !== undefined ? { role: claims.role } : {}),
+        ...(claims.company_id !== undefined ? { company_id: claims.company_id } : {}),
+        ...(claims.permissions.length > 0 ? { permissions: claims.permissions } : {}),
+      } as VerifiedToken;
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unknown error';
       this.logger.warn(`Token verification failed: ${message}`);
