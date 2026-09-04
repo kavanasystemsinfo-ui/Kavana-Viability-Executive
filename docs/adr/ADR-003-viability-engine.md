@@ -30,9 +30,9 @@ Decisiones concretas:
 
 ## Alternativas evaluadas
 
-| Alternativa | Pro | Contra |
+|| Alternativa | Pro | Contra |
 |-------------|-----|--------|
-| **Librería Nx TypeScript pura con funciones sin estado (elegida)** | Testable al 100% sin mocks de BD; compartible por web/API/agentes vía path mapping; determinista; cero dependencias nuevas de runtime; lista para persistir en la tarea 7 | El "hoy" por defecto en fechaCorte hace la velocidad no reproducible si no se pasa fechaCorte fija; requiere decisión explícita de redondeo (documentada) |
+| **Librería Nx TypeScript pura con funciones sin estado (elegida)** | Testable al 100% sin mocks de BD; compartible por web/API/agentes vía path mapping; determinista; cero dependencias nuevas de runtime; lista para persistir en la tarea 7 | El \"hoy\" por defecto en fechaCorte hace la velocidad no reproducible si no se pasa fechaCorte fija; requiere decisión explícita de redondeo (documentada) |
 | Módulo NestJS (servicios + repositorio BD) | Integrado con la API desde el primer día | Enreda el dominio con infraestructura que aún no existe (BD es tarea 7); tests necesitan mocks; cada agente tendría que inyectar el servicio |
 | Utilidades dentro de apps/web | Cero estructura nueva | No compartible con API/agentes; duplica lógica o fuerza imports cruzados de apps; viola la separación por librerías del monorepo |
 | Script suelto / CLI independiente | Simple de escribir | Sin tipos compartidos con el resto; no integrable en el grafo de Nx; tercera pieza de tooling que mantener |
@@ -47,7 +47,7 @@ Decisiones concretas:
 
 **Negativas / tradeoffs:**
 - Dos helpers extra fuera de la lista mínima de la spec (`calcularVelocidadVenta`, `calcularConsistencia`, `calcularCostePorUnidad`, `calcularCostePorM2`) para permitir RED/GREEN por grupo sin implementar antes de tiempo la función maestra; son internos de `calcularViabilidad` y no amplían el contrato.
-- `NaN` en campos tipados `number` (margen % con ingresos 0) obliga a los consumidores a comprobar `Number.isNaN`; es el "error explícito" elegido, documentado en los tests.
+- `NaN` en campos tipados `number` (margen % con ingresos 0) obliga a los consumidores a comprobar `Number.isNaN`; es el \"error explícito\" elegido, documentado en los tests.
 - El generador Nx añadió 4 devDependencies estándar (`jest-environment-node`, `jest-util`, `ts-node`, `jsonc-eslint-parser`) y registró los plugins de inferencia de eslint/jest en `nx.json` (configuración estándar Nx 23).
 - `package.json` de la raíz gana el script `viability-engine` (ya pre-existía en HEAD como pre-staging) y 4 devDeps; sin dependencias de runtime nuevas.
 
@@ -59,3 +59,11 @@ Decisiones concretas:
 - `libs/viability-engine/src/index.ts` — superficie pública del módulo (`@kavana-viability-executive/viability-engine`).
 - `libs/viability-engine/project.json` — targets `build` (@nx/js:tsc), `test` (@nx/jest:jest), `lint` (@nx/eslint:lint).
 - `tsconfig.base.json` — path mapping `@kavana-viability-executive/viability-engine` → `libs/viability-engine/src/index.ts`.
+
+## Lecciones aprendidas
+
+Lo mejor de la decisión: construir el motor de viabilidad como una librería TypeScript pura, sin estado y sin dependencias de BD, permitió pruebas unitarias exhaustivas, determinismo y reutilización en web, API y futuros agentes, manteniendo la lógica central libre de preocupaciones de infraestructura.
+
+Qué cambiaría hoy tras revisar el estado del proyecto en septiembre 2026: habría hecho que el motor fuera más estricto en el manejo de fechas y umbrales, obligando explícitamente a pasar una fechaCorte fija para reproducibilidad, y habría añadido validaciones de entrada más tempranas para evitar NaN en los consumidores, a pesar de que el principio de error explícito fue seguido.
+
+Qué aprendí que aplicaría a futuros proyectos: en bibliotecas de dominio, la pureza y la testabilidad son fundamentales, pero la experiencia del consumidor (cómo maneja NaN o valores opcionales) debe considerarse en el diseño de la API, proporcionando helpers o wrappers que reduzcan la carga de manejo de casos especiales en los puntos de entrada.

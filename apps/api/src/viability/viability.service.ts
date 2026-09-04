@@ -42,6 +42,13 @@ export class ViabilityService {
     @InjectModel(ViabilityRun.name) private readonly viabilityRunModel: Model<ViabilityRun>,
   ) {}
 
+  /**
+   * Devuelve el resumen de todas las promociones de la empresa, ordenadas por nombre.
+   *
+   * @param companyId - Identificador de la empresa (multi-tenant).
+   * @returns Array de `PromocionResumen` con identificador, nombre, estado,
+   *   ciudad y unidades (totales y vendidas si están registradas).
+   */
   async listarPromociones(companyId: string): Promise<PromocionResumen[]> {
     const docs = await this.promotionModel.find({ companyId }).sort({ name: 1 }).lean().exec();
     return docs.map((d) => ({
@@ -54,6 +61,20 @@ export class ViabilityService {
     }));
   }
 
+  /**
+   * Carga la promoción, calcula su viabilidad con el motor puro y persiste el resultado.
+   *
+   * @param companyId - Identificador de la empresa (multi-tenant).
+   * @param promotionId - Identificador de la promoción dentro de la empresa.
+   * @param opciones - (Opcional) overrides para este cálculo:
+   *   - `fechaCorte`: fecha ISO a aplicar sobre el input del documento.
+   *   - `umbralMarginBrutoMinPct`: umbral de margen bruto mínimo (%). Si falta
+   *     o es `NaN`, se usa el default del motor.
+   * @returns `ResultadoViabilidadPromocion` con el resultado del motor y, si
+   *   se aplicó, la `fechaCorte`. El cálculo queda también registrado en
+   *   `viability_runs` para auditoría.
+   * @throws NotFoundException si la promoción no existe para esa empresa.
+   */
   async calcularViabilidadPromocion(
     companyId: string,
     promotionId: string,
@@ -67,6 +88,8 @@ export class ViabilityService {
     }
 
     const inputBase = promocionDocToViabilityInput(promocion);
+    // La fechaCorte del query tiene prioridad sobre la que el mapper derive
+    // del documento: refleja la voluntad del usuario para este cálculo.
     const input = opciones?.fechaCorte
       ? { ...inputBase, fechaCorte: opciones.fechaCorte }
       : inputBase;
@@ -78,6 +101,8 @@ export class ViabilityService {
 
     const resultado = calcularViabilidad(input, umbrales);
 
+    // Persistimos siempre, incluso si el motor marca no viable: el histórico
+    // de runs es lo que permite auditar y comparar cálculos en el tiempo.
     await this.viabilityRunModel.create({
       companyId,
       promotionId,

@@ -28,7 +28,7 @@ Monorepo **Nx 23** (npm workspaces) con dos aplicaciones TypeScript estricto:
 
 ## Alternativas evaluadas
 
-| Alternativa | Pro | Contra |
+|| Alternativa | Pro | Contra |
 |-------------|-----|--------|
 | **Monorepo Nx (Angular SSR + NestJS)** | Un solo lenguaje y toolchain; SSR de serie; estructura escalable a libs compartidas; comunidad grande | Dos deploys; tooling Nx con curva; Angular 22 exige TypeScript 6 (ajustes de compatibilidad, ver ADR-002) |
 | Next.js full-stack monolítico | Un solo deploy; rápido de arrancar | Acopla web y API; typing compartido más débil para libs de dominio; migración costosa si el dominio crece (motor+RAG+agentes) |
@@ -54,3 +54,11 @@ Monorepo **Nx 23** (npm workspaces) con dos aplicaciones TypeScript estricto:
 - `apps/web/` — web Angular SSR (rutas y guard en `apps/web/src/app/`).
 - `package.json` / `nx.json` — monorepo Nx 23, npm workspaces.
 - `tsconfig.base.json` — TypeScript 6.0.3 con `ignoreDeprecations` (deuda técnica: migrar `moduleResolution` en el futuro).
+
+## Lecciones aprendidas
+
+Lo mejor de la decisión: la decisión de usar un monorepo Nx con Angular SSR y NestJS proporcionó un solo lenguaje (TypeScript) y una estructura escalable desde el inicio, lo que facilitó el desarrollo en equipo de una persona y permitió compartir código entre web y API.
+
+Qué cambiaría hoy tras revisar el estado del proyecto en septiembre 2026: habría considerado una solución de despliegue unificada (por ejemplo, todo en Vercel o todo en Render) para reducir la complejidad operativa de gestionar dos plataformas, a pesar de las limitaciones de NestJS en serverless, porque el overhead de dos deploys y la necesidad de Node 22 en CI resultó ser una fricción inesperada.
+
+Qué aprendí que aplicaría a futuros proyectos: en proyectos con recursos limitados, la simplicidad en el despliegue y la operatividad es tan importante como la elegancia técnica; evaluar el esfuerzo de mantenimiento de múltiples plataformas desde el principio puede evitar rework y dolores de cabeza en la integración continua.

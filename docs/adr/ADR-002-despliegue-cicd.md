@@ -12,7 +12,7 @@ Tras el ADR-001 (stack Nx), hay dos artefactos que publicar: web Angular SSR y A
 
 ## Problema
 
-Configurar un pipeline que en cada push a `master` verifique calidad y despliegue ambos servicios, con secretos gestionados por plataforma (sin volcar claves de Clerk en el repo).
+Configurar un pipeline que en cada push a `master` verifique calidad y despliegue ambos servicios, con secretos gestionando secretos por plataforma (sin volcar claves de Clerk en el repo).
 
 ## Decisión
 
@@ -23,7 +23,7 @@ Configurar un pipeline que en cada push a `master` verifique calidad y despliegu
 
 ## Alternativas evaluadas
 
-| Alternativa | Pro | Contra |
+|| Alternativa | Pro | Contra |
 |-------------|-----|--------|
 | **GitHub Actions + Vercel (web) + Render (API)** | Gratis de arranque; cada plataforma especialista en su tipo (SSR / API long-running); deploy hooks simples | Dos paneles que vigilar; Render free se duerme a los 15 min (los webhooks de Clerk reintentan) |
 | Todo en Vercel (API como serverless functions) | Un solo panel | NestJS con webhooks y raw body en serverless requiere adaptaciones; costes por invocación; menos control |
@@ -42,8 +42,7 @@ Configurar un pipeline que en cada push a `master` verifique calidad y despliegu
   1. Añadir `.npmrc` con `legacy-peer-deps=true` (rápido, pero acepta resoluciones potencialmente rotas).
   2. Subir `ts-jest` a una versión compatible con TypeScript 6 (limpieza real, requiere re-testear la suite).
   Recomendación: opción 2 si existe release compatible; si no, 1 como puente documentado.
-
-**Nota de resolución (30/08/2026):** se ejecutó la opción 2. `ts-jest` subido de 29.2.6 a **29.4.12** (verificado en el registro npm: peer `typescript >=4.3 <7`). La suite (27/27 tests) y los builds de api y web pasan en local con TypeScript 6.0.3. La opción `.npmrc` quedó descartada como innecesaria.
+- **Nota de resolución (30/08/2026):** se ejecutó la opción 2. `ts-jest` subido de 29.2.6 a **29.4.12** (verificado en el registro npm: peer `typescript >=4.3 <7`). La suite (27/27 tests) y los builds de api y web pasan en local con TypeScript 6.0.3. La opción `.npmrc` quedó descartada como innecesaria.
 - Render free se duerme a los 15 minutos sin tráfico (primer request lento tras dormir; no se pierden webhooks, Clerk reintenta).
 - La `CLERK_PUBLISHABLE_KEY` de la web se fija en build (environment estático): para producción dinámica hay que inyectarla en el bundle (pendiente).
 - Los workflows se disparan sobre `master`: si algún día se renombra a `main`, hay que actualizar los `on:`.
@@ -56,3 +55,11 @@ Configurar un pipeline que en cada push a `master` verifique calidad y despliegu
 - `vercel.json` — framework Angular y output.
 - `render.yaml` — Blueprint del servicio API.
 - `.github/README-ci.md` — pasos operativos para conectar las plataformas.
+
+## Lecciones aprendidas
+
+Lo mejor de la decisión: establecer un pipeline de CI/CD con GitHub Actions que ejecuta lint, tests y build antes de cada despliegue garantizó la calidad del código y automatizó la liberación, permitiendo releases con cada push a master sin intervención manual.
+
+Qué cambiaría hoy tras revisar el estado del proyecto en septiembre 2026: habría invertido más tiempo en resolver el conflicto de versiones de TypeScript y ts-jest de forma proactiva (por ejemplo, usando un monorepo con versiones fijadas mediante paquetes internos) en lugar de reaccionar después de que el CI fallara, y habría añadido pruebas de extremo a extremo (aunque solo hubiera un scaffold) para validar los webhooks y el rate limiting que se identificaron como lagunas.
+
+Qué aprendí que aplicaría a futuros proyectos: la CI es una inversión que se paga rápidamente, pero que la configuración de dependencias y la compatibilidad de versiones deben tratarse como parte del pipeline, con revisiones periódicas de auditoría de dependencias, y que incluso en proyectos pequeños, pensar en pruebas de integración desde el inicio ayuda a capturar problemas de arquitectura y configuración temprano.
