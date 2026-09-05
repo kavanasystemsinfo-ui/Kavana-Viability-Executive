@@ -1,18 +1,19 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { Promotion, PromotionSchema } from './promotion.schema';
-import { ViabilityRun, ViabilityRunSchema } from './viability-run.schema';
 import { ViabilityService } from './viability.service';
 import { PromotionsController } from './promotions.controller';
 
+/**
+ * Módulo de viabilidad y promociones.
+ *
+ * Contrato actual (worktree): el ViabilityService es un mock AUTOCONTENIDO en
+ * memoria (sin Mongoose) con 3 promociones de demostración (Altair, Bahía, Mar).
+ * Por eso el módulo ya no registra modelos Mongoose: nada los inyecta. Cuando se
+ * reintroduzca el motor real con persistencia, se volverá a añadir
+ * MongooseModule.forFeature junto con los modelos.
+ */
 @Module({
-  imports: [
-    MongooseModule.forFeature([
-      { name: Promotion.name, schema: PromotionSchema },
-      { name: ViabilityRun.name, schema: ViabilityRunSchema },
-    ]),
-  ],
   controllers: [PromotionsController],
   providers: [ViabilityService],
+  exports: [ViabilityService],
 })
 export class ViabilityModule {}

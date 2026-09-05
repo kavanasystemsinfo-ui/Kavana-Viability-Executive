@@ -28,15 +28,18 @@ export const appRoutes: Route[] = [
     children: [
       {
         path: 'dashboard',
-        loadComponent: () => import('./dashboard/overview-page').then((m) => m.OverviewPageComponent),
+        loadComponent: () =>
+          import('./dashboard/overview-page').then((m) => m.OverviewPageComponent),
       },
       {
         path: 'promotions',
-        loadComponent: () => import('./dashboard/promotions-page').then((m) => m.PromotionsPageComponent),
+        loadComponent: () =>
+          import('./dashboard/promotions-page').then((m) => m.PromotionsPageComponent),
       },
       {
         path: 'promotions/:id',
-        loadComponent: () => import('./dashboard/promotion-detail-page').then((m) => m.PromotionDetailPageComponent),
+        loadComponent: () =>
+          import('./dashboard/promotion-detail-page').then((m) => m.PromotionDetailPageComponent),
       },
       {
         path: 'chat',

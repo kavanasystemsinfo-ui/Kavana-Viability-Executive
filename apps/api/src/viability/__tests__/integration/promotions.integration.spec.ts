@@ -1,95 +1,74 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
-import { getModelToken } from '@nestjs/mongoose';
-import { Promotion } from '../../promotion.schema';
-import { ViabilityRun } from '../../viability-run.schema';
+import type { INestApplication } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
+import { Test, type TestingModule } from '@nestjs/testing';
+import { PromotionsController } from '../../promotions.controller';
 import { ViabilityModule } from '../../viability.module';
 
 /**
- * Test de integración de PromotionsController.
+ * Test de integración de PromotionsController (endpoint GET /promotions) contra
+ * el contrato ACTUAL del ViabilityService: mock en memoria con 3 promociones
+ * (Altair, Bahía, Mar) y resumen {promotionId, name, status, location,
+ * unitsTotal, unitsSold, avgPrice, totalRevenue, margin}.
  *
- * Estrategia: importamos SOLO `ViabilityModule` en lugar de `AppModule`
- * para evitar arrastrar `ClerkAuthModule` -> `ConfigModule` (paquete
- * @nestjs/config v12, publicado como ESM puro). Jest (CommonJS) no puede
- * parsear `export *` de ese paquete, lo que bloquea la carga del módulo.
- *
- * `ViabilityModule` solo registra MongooseModule.forFeature (no forRoot)
- * + el controlador + el servicio, así que no requiere MongoDB real:
- * los modelos se mockean vía `getModelToken`.
+ * Estrategia: importamos SOLO `ViabilityModule` en lugar de `AppModule` para
+ * evitar arrastrar `ClerkAuthModule` -> `ConfigModule` (paquete @nestjs/config
+ * v12, publicado como ESM puro que Jest en CommonJS no puede parsear), y
+ * neutralizamos APP_GUARD porque los guards globales viven en ClerkAuthModule.
+ * El servicio real (en memoria) no requiere MongoDB ni mocks de modelos.
  */
 describe('PromotionsController (Integration)', () => {
   let app: INestApplication;
-
-  const mockPromotionModel: any = {
-    find: jest.fn(),
-  };
-  const mockViabilityRunModel: any = {
-    create: jest.fn(),
-  };
+  let controller: PromotionsController;
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [ViabilityModule],
     })
-      // Los controllers usan @Roles('viewer') y los guards globales
-      // (ClerkAuthGuard + RolesGuard) viven en ClerkAuthModule. Como NO
-      // importamos ese módulo, neutralizamos APP_GUARD para que Nest no
-      // se queje de guards ausentes.
-      .overrideGuard(require('@nestjs/core').APP_GUARD ?? 'APP_GUARD')
+      .overrideGuard(APP_GUARD ?? 'APP_GUARD')
       .useValue({ canActivate: () => true })
-      .overrideProvider(getModelToken(Promotion.name))
-      .useValue(mockPromotionModel)
-      .overrideProvider(getModelToken(ViabilityRun.name))
-      .useValue(mockViabilityRunModel)
       .compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
+    controller = app.get(PromotionsController);
   });
 
   afterEach(async () => {
     await app.close();
-    jest.clearAllMocks();
   });
 
-  it('GET /promotions -> array de PromocionResumen', async () => {
-    const mockPromotions = [
-      {
-        promotionId: 'promo-la-marina',
-        name: 'La Marina',
-        status: 'En curso',
-        city: 'Castellón',
-        unitsTotal: 100,
-        unitsSold: 25,
-      },
-      {
-        promotionId: 'promo-garden-view',
-        name: 'Garden View',
-        status: 'Planificación',
-        city: 'Valencia',
-        unitsTotal: 50,
-        unitsSold: 0,
-      },
-    ];
+  it('GET /promotions devuelve las 3 promociones de demostración', async () => {
+    const result = await controller.listar({
+      companyId: 'kavana_viability_executive',
+      userRole: 'viewer',
+    } as any);
 
-    // Mock del chain mongoose: find().sort({name:1}).lean().exec()
-    mockPromotionModel.find.mockReturnValue({
-      sort: jest.fn().mockReturnValue({
-        lean: jest.fn().mockReturnValue({
-          exec: jest.fn().mockResolvedValue(mockPromotions),
-        }),
-      }),
+    expect(result).toHaveLength(3);
+    expect(result.map((p: any) => p.promotionId)).toEqual(['promo-1', 'promo-2', 'promo-3']);
+  });
+
+  it('GET /promotions devuelve el resumen completo del contrato para cada promoción', async () => {
+    const result = await controller.listar({
+      companyId: 'kavana_viability_executive',
+      userRole: 'viewer',
+    } as any);
+
+    expect(result[0]).toMatchObject({
+      promotionId: 'promo-1',
+      name: 'Promoción Altair',
+      status: 'En venta',
+      location: { city: 'Castellón' },
+      unitsTotal: 100,
+      unitsSold: 25,
+      avgPrice: 150000,
+      totalRevenue: 3750000,
+      margin: 30,
     });
+  });
 
-    // Usamos el TestingModule + el httpServer de Nest directamente,
-    // sin hacer listen() sobre un puerto (evita dependencias de red y
-    // el problema de que getHttpServer() devuelve un Server envuelto
-      // que devuelve `null` desde address() en algunas plataformas).
-    const httpServer = app.getHttpServer();
-    const address = httpServer.address();
-    const port =
-      typeof address === 'object' && address !== null ? address.port : 0;
-    expect(port).toBeGreaterThanOrEqual(0);
-    expect(mockPromotionModel.find).toBeDefined();
+  it('GET /promotions aplica la empresa por defecto si el request no trae companyId', async () => {
+    const result = await controller.listar({} as any);
+
+    expect(result).toHaveLength(3);
   });
 });

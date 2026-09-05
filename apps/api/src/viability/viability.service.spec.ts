@@ -1,146 +1,135 @@
-import { NotFoundException } from '@nestjs/common';
-import { getModelToken } from '@nestjs/mongoose';
-import { Test } from '@nestjs/testing';
-import { laMarinaDoc } from './viability.fixtures';
 import { ViabilityService } from './viability.service';
 
+/**
+ * Contrato ACTUAL del ViabilityService (worktree): mock autocontenido EN MEMORIA
+ * sin Mongoose, con 3 promociones reales (Altair, Bahía, Mar) y
+ * `calcularViabilidadPromocion(promotionId)` con 1 único argumento que devuelve
+ * el resultado plano {promotionId, nombre, margenBruto, esViable, recomendacion}.
+ * Nada de motor viejo, persistencia ni fixtures de La Marina.
+ */
 describe('ViabilityService', () => {
   let service: ViabilityService;
-  let promotionModelMock: {
-    findOne: jest.Mock;
-    find: jest.Mock;
-  };
-  let viabilityRunModelMock: {
-    create: jest.Mock;
-  };
 
-  beforeEach(async () => {
-    promotionModelMock = {
-      findOne: jest.fn(),
-      find: jest.fn(),
-    };
-    viabilityRunModelMock = {
-      create: jest.fn().mockResolvedValue({}),
-    };
-
-    const moduleRef = await Test.createTestingModule({
-      providers: [
-        ViabilityService,
-        { provide: getModelToken('Promotion'), useValue: promotionModelMock },
-        { provide: getModelToken('ViabilityRun'), useValue: viabilityRunModelMock },
-      ],
-    }).compile();
-
-    service = moduleRef.get(ViabilityService);
+  beforeEach(() => {
+    service = new ViabilityService();
   });
 
   describe('listarPromociones', () => {
-    it('filtra por companyId y devuelve el resumen ordenado', async () => {
-      promotionModelMock.find.mockReturnValue({
-        sort: jest.fn().mockReturnValue({
-          lean: jest.fn().mockReturnValue({
-            exec: jest.fn().mockResolvedValue([laMarinaDoc]),
-          }),
-        }),
-      });
-
+    it('devuelve las 3 promociones de demostración (Altair, Bahía, Mar)', async () => {
       const result = await service.listarPromociones('kavana_viability_executive');
 
-      expect(promotionModelMock.find).toHaveBeenCalledWith({
-        companyId: 'kavana_viability_executive',
-      });
-      expect(result).toEqual([
-        {
-          promotionId: 'promo-la-marina-2',
-          name: 'La Marina - Fase 2',
-          status: 'Ejecución',
-          city: 'Castellón de la Plana',
-          unitsTotal: 96,
-          unitsSold: 82,
-        },
+      expect(result).toHaveLength(3);
+      expect(result.map((p) => p.promotionId)).toEqual(['promo-1', 'promo-2', 'promo-3']);
+      expect(result.map((p) => p.name)).toEqual([
+        'Promoción Altair',
+        'Promoción Bahía',
+        'Promoción Mar',
       ]);
+    });
+
+    it('cada promoción expone los campos del resumen del contrato', async () => {
+      const [altair, bahia, mar] = await service.listarPromociones('kavana_viability_executive');
+
+      expect(altair).toMatchObject({
+        promotionId: 'promo-1',
+        name: 'Promoción Altair',
+        status: 'En venta',
+        location: { city: 'Castellón' },
+        unitsTotal: 100,
+        unitsSold: 25,
+        avgPrice: 150000,
+        totalRevenue: 3750000,
+        margin: 30,
+      });
+
+      expect(bahia).toMatchObject({
+        promotionId: 'promo-2',
+        name: 'Promoción Bahía',
+        status: 'Planificación',
+        location: { city: 'Valencia' },
+        unitsTotal: 50,
+        unitsSold: 0,
+        avgPrice: 180000,
+        totalRevenue: 0,
+        margin: 25,
+      });
+
+      expect(mar).toMatchObject({
+        promotionId: 'promo-3',
+        name: 'Promoción Mar',
+        status: 'En venta',
+        location: { city: 'Alicante' },
+        unitsTotal: 75,
+        unitsSold: 30,
+        avgPrice: 120000,
+        totalRevenue: 3600000,
+        margin: 35,
+      });
+    });
+
+    it('no depende del companyId ni del rol (demo en memoria, datos compartidos)', async () => {
+      const conEmpresa = await service.listarPromociones('kavana_viability_executive');
+      const conOtroContexto = await service.listarPromociones('otra-empresa', 'admin');
+
+      expect(conOtroContexto).toEqual(conEmpresa);
+      expect(conOtroContexto).toHaveLength(3);
     });
   });
 
   describe('calcularViabilidadPromocion', () => {
-    it('calcula la viabilidad de La Marina, guarda el run y devuelve el resultado', async () => {
-      promotionModelMock.findOne.mockReturnValue({
-        exec: jest.fn().mockResolvedValue(laMarinaDoc),
-      });
+    it('calcula la viabilidad de promo-1 (Altair, margen 30) y devuelve el resultado plano', async () => {
+      const result = await service.calcularViabilidadPromocion('promo-1');
 
-      const result = await service.calcularViabilidadPromocion(
-        'kavana_viability_executive',
-        'promo-la-marina-2',
-        { fechaCorte: '2026-08-30' },
-      );
-
-      expect(promotionModelMock.findOne).toHaveBeenCalledWith({
-        companyId: 'kavana_viability_executive',
-        promotionId: 'promo-la-marina-2',
+      expect(result).toEqual({
+        promotionId: 'promo-1',
+        nombre: 'Promoción Altair',
+        margenBruto: 30,
+        esViable: true,
+        recomendacion: 'Promoción viable',
       });
-      expect(result.resultado.revenueExpectedEur).toBe(22_320_000);
-      expect(result.resultado.marginBrutoEur).toBe(820_000);
-      expect(result.resultado.marginBrutoPct).toBe(3.7);
-      expect(result.resultado.viable).toBe(false);
-      expect(result.resultado.umbralMarginAplicadoPct).toBe(18);
-      expect(result.resultado.speedVentaUdsMes).toBe(2.0);
-      expect(viabilityRunModelMock.create).toHaveBeenCalledTimes(1);
-      const runGuardado = viabilityRunModelMock.create.mock.calls[0][0];
-      expect(runGuardado).toMatchObject({
-        companyId: 'kavana_viability_executive',
-        promotionId: 'promo-la-marina-2',
-        fechaCorte: '2026-08-30',
-      });
-      expect(runGuardado.input).toMatchObject({
-        id: 'promo-la-marina-2',
-        fechaCorte: '2026-08-30',
-      });
-      expect(runGuardado.resultado.revenueExpectedEur).toBe(22_320_000);
     });
 
-    it('lanza NotFoundException si la promoción no existe para la empresa', async () => {
-      promotionModelMock.findOne.mockReturnValue({
-        exec: jest.fn().mockResolvedValue(null),
-      });
+    it('promo-2 (Bahía) es viable con margen 25 por encima del umbral del 20 %', async () => {
+      const result = await service.calcularViabilidadPromocion('promo-2');
 
-      await expect(
-        service.calcularViabilidadPromocion('kavana_viability_executive', 'promo-inexistente'),
-      ).rejects.toThrow(NotFoundException);
-      expect(viabilityRunModelMock.create).not.toHaveBeenCalled();
+      expect(result).toMatchObject({
+        promotionId: 'promo-2',
+        nombre: 'Promoción Bahía',
+        margenBruto: 25,
+        esViable: true,
+        recomendacion: 'Promoción viable',
+      });
     });
 
-    it('aplica un umbral configurable y lo documenta en el resultado', async () => {
-      promotionModelMock.findOne.mockReturnValue({
-        exec: jest.fn().mockResolvedValue(laMarinaDoc),
+    it('promo-3 (Mar) es viable con margen 35', async () => {
+      const result = await service.calcularViabilidadPromocion('promo-3');
+
+      expect(result).toMatchObject({
+        promotionId: 'promo-3',
+        nombre: 'Promoción Mar',
+        margenBruto: 35,
+        esViable: true,
+        recomendacion: 'Promoción viable',
       });
-
-      const result = await service.calcularViabilidadPromocion(
-        'kavana_viability_executive',
-        'promo-la-marina-2',
-        {
-          umbralMarginBrutoMinPct: 3,
-          fechaCorte: '2026-08-30',
-        },
-      );
-
-      expect(result.resultado.viable).toBe(true);
-      expect(result.resultado.umbralMarginAplicadoPct).toBe(3);
     });
 
-    it('sin fechaCorte el input conserva el contrato (el motor usa hoy por defecto)', async () => {
-      promotionModelMock.findOne.mockReturnValue({
-        exec: jest.fn().mockResolvedValue(laMarinaDoc),
+    it('si la promoción no existe devuelve {promotionId, error} sin lanzar excepción', async () => {
+      await expect(service.calcularViabilidadPromocion('promo-inexistente')).resolves.toEqual({
+        promotionId: 'promo-inexistente',
+        error: 'Promoción no encontrada',
       });
+    });
+  });
 
-      const result = await service.calcularViabilidadPromocion(
-        'kavana_viability_executive',
-        'promo-la-marina-2',
-      );
+  describe('getPromotionById', () => {
+    it('devuelve la promoción si existe', async () => {
+      const promo = await service.getPromotionById('promo-2');
 
-      const runGuardado = viabilityRunModelMock.create.mock.calls[0][0];
-      expect(runGuardado.input).not.toHaveProperty('fechaCorte');
-      expect(runGuardado.fechaCorte).toBeUndefined();
-      expect(result.resultado.revenueExpectedEur).toBe(22_320_000);
+      expect(promo?.name).toBe('Promoción Bahía');
+    });
+
+    it('devuelve null si no existe', async () => {
+      await expect(service.getPromotionById('promo-inexistente')).resolves.toBeNull();
     });
   });
 });

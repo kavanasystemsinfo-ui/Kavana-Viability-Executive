@@ -3,9 +3,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ClerkAuthModule } from '../auth/clerk-auth.module';
 import { ViabilityModule } from '../viability/viability.module';
+import { ChatModule } from '../chat/chat.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+import { UserSettingsModule } from '../user-settings/user-settings.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -31,6 +33,8 @@ import { AppService } from './app.service';
     }),
     ClerkAuthModule,
     ViabilityModule,
+    ChatModule,
+    UserSettingsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

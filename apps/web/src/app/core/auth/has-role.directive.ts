@@ -1,28 +1,29 @@
-import { Directive, Input, TemplateRef, ViewContainerRef } from '@angular/core';
-import { AuthService } from './auth.service';
+import type { TemplateRef, ViewContainerRef } from '@angular/core';
+import { Directive, Input } from '@angular/core';
+import type { AuthService } from './auth.service';
 
 @Directive({
   selector: '[appHasRole]',
-  standalone: true
+  standalone: true,
 })
 export class HasRoleDirective {
   private hasView = false;
 
   constructor(
-    private templateRef: TemplateRef<any>,
+    private templateRef: TemplateRef<unknown>,
     private viewContainer: ViewContainerRef,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   @Input()
   set appHasRole(roles: string[]) {
     // Clear previous view
     this.viewContainer.clear();
-    
+
     // Check if user has any of the required roles
     const userRole = this.authService.role$();
-    const hasRole = roles.some(role => userRole === role);
-    
+    const hasRole = roles.some((role) => userRole === role);
+
     // Create or destroy view based on authorization
     if (hasRole && !this.hasView) {
       this.viewContainer.createEmbeddedView(this.templateRef);

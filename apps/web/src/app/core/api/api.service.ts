@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import type { Observable } from 'rxjs';
 import type { Promotion } from './api.types';
 import type { ViabilityResult } from './api.types';
 

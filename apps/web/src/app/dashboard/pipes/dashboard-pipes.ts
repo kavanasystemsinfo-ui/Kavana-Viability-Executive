@@ -4,7 +4,7 @@ import type { Promotion } from '../../core/api/api.types';
 
 @Pipe({
   name: 'totalRevenue',
-  pure: true
+  pure: true,
 })
 export class TotalRevenuePipe implements PipeTransform {
   transform(promotions: Promotion[] | null): string {
@@ -20,7 +20,7 @@ export class TotalRevenuePipe implements PipeTransform {
 
 @Pipe({
   name: 'avgMarginPct',
-  pure: true
+  pure: true,
 })
 export class AvgMarginPctPipe implements PipeTransform {
   transform(promotions: Promotion[] | null): number {
@@ -29,16 +29,19 @@ export class AvgMarginPctPipe implements PipeTransform {
     const totalWeighted = promotionsArray.reduce((sum, p) => {
       const margin = p.financials?.projected_margin_pct ?? 0;
       const revenue = p.financials?.revenue_contracted_eur ?? 0;
-      return sum + (margin * revenue);
+      return sum + margin * revenue;
     }, 0);
-    const totalRevenue = promotionsArray.reduce((sum, p) => sum + (p.financials?.revenue_contracted_eur ?? 0), 0);
+    const totalRevenue = promotionsArray.reduce(
+      (sum, p) => sum + (p.financials?.revenue_contracted_eur ?? 0),
+      0,
+    );
     return totalRevenue > 0 ? totalWeighted / totalRevenue : 0;
   }
 }
 
 @Pipe({
   name: 'presalesRate',
-  pure: true
+  pure: true,
 })
 export class PresalesRatePipe implements PipeTransform {
   transform(promotions: Promotion[] | null): number {
@@ -52,15 +55,14 @@ export class PresalesRatePipe implements PipeTransform {
 
 @Pipe({
   name: 'avgVelocity',
-  pure: true
+  pure: true,
 })
 export class AvgVelocityPipe implements PipeTransform {
   transform(promotions: Promotion[] | null): number {
     const promotionsArray = promotions || [];
     if (promotionsArray.length === 0) return 0;
-    const activePromos = promotionsArray.filter(p => 
-      (p.unitsSold ?? 0) > 0 && 
-      p.status?.toLowerCase().includes('ejecución')
+    const activePromos = promotionsArray.filter(
+      (p) => (p.unitsSold ?? 0) > 0 && p.status?.toLowerCase().includes('ejecución'),
     );
     if (activePromos.length === 0) return 0;
     const totalVelocity = activePromos.reduce((sum, p) => {
@@ -74,32 +76,33 @@ export class AvgVelocityPipe implements PipeTransform {
 
 @Pipe({
   name: 'attentionRequiredCount',
-  pure: true
+  pure: true,
 })
 export class AttentionRequiredCountPipe implements PipeTransform {
   transform(promotions: Promotion[] | null): number {
     const promotionsArray = promotions || [];
     if (promotionsArray.length === 0) return 0;
-    return promotionsArray.filter(p => this.isAttentionRequired(p)).length;
+    return promotionsArray.filter((p) => this.isAttentionRequired(p)).length;
   }
 
   private isAttentionRequired(promo: Promotion): boolean {
     const marginPct = promo.financials?.projected_margin_pct ?? 0;
-    const preVentasPct = promo.unitsTotal > 0 ? (promo.unitsSold ?? 0) / promo.unitsTotal * 100 : 0;
+    const preVentasPct =
+      promo.unitsTotal > 0 ? ((promo.unitsSold ?? 0) / promo.unitsTotal) * 100 : 0;
     return marginPct < 12 || preVentasPct < 15;
   }
 }
 
 @Pipe({
   name: 'attentionRequired',
-  pure: true
+  pure: true,
 })
 export class AttentionRequiredPipe implements PipeTransform {
   transform(promotions: Promotion[] | null, limit: number = 3): Promotion[] {
     const promotionsArray = promotions || [];
     if (promotionsArray.length === 0) return [];
     return promotionsArray
-      .filter(p => this.isAttentionRequired(p))
+      .filter((p) => this.isAttentionRequired(p))
       .sort((a, b) => {
         const marginA = a.financials?.projected_margin_pct ?? 0;
         const marginB = b.financials?.projected_margin_pct ?? 0;
@@ -110,14 +113,15 @@ export class AttentionRequiredPipe implements PipeTransform {
 
   private isAttentionRequired(promo: Promotion): boolean {
     const marginPct = promo.financials?.projected_margin_pct ?? 0;
-    const preVentasPct = promo.unitsTotal > 0 ? (promo.unitsSold ?? 0) / promo.unitsTotal * 100 : 0;
+    const preVentasPct =
+      promo.unitsTotal > 0 ? ((promo.unitsSold ?? 0) / promo.unitsTotal) * 100 : 0;
     return marginPct < 12 || preVentasPct < 15;
   }
 }
 
 @Pipe({
   name: 'topByMargin',
-  pure: true
+  pure: true,
 })
 export class TopByMarginPipe implements PipeTransform {
   transform(promotions: Promotion[] | null, limit: number = 5): Promotion[] {
@@ -135,7 +139,7 @@ export class TopByMarginPipe implements PipeTransform {
 
 @Pipe({
   name: 'promotionsCount',
-  pure: true
+  pure: true,
 })
 export class PromotionsCountPipe implements PipeTransform {
   transform(promotions: Promotion[] | null, param: string = 'total'): number {

@@ -8,7 +8,7 @@ export class AuthService {
   private clerk = inject(ClerkService);
 
   // Signals - initialized as null, will be updated by components that need them
-  readonly user$ = signal<any>(null);
+  readonly user$ = signal<unknown>(null);
   readonly role$ = signal<Role | null>(null);
   readonly companyId$ = signal<string | null>(null);
 
@@ -42,15 +42,27 @@ export class AuthService {
     const CLERK_LOAD_TIMEOUT_MS = 5000;
     const deadline = Date.now() + CLERK_LOAD_TIMEOUT_MS;
     while (!this.clerk.isLoaded() && Date.now() < deadline) {
-      await new Promise(resolve => setTimeout(resolve, 50));
+      await new Promise((resolve) => setTimeout(resolve, 50));
     }
 
     if (this.clerk.isLoaded() && this.clerk.isSignedIn()) {
       const session = await this.clerk.session;
       // Assuming getToken() exists based on auth.guard pattern
-      return (session as any).getToken?.() ?? '';
+      return (session as { getToken?: () => Promise<string> | string }).getToken?.() ?? '';
     }
     return '';
+  }
+
+  /**
+   * Get the current user's display name (email) or a default
+   */
+  userDisplayName(): string {
+    const user = this.user$();
+    if (user && typeof user === 'object' && 'email' in user) {
+      const email = (user as { email?: unknown }).email;
+      if (typeof email === 'string') return email;
+    }
+    return 'Usuario';
   }
 
   /**

@@ -1,5 +1,6 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import type { TestingModule } from '@nestjs/testing';
+import { Test } from '@nestjs/testing';
+import type { INestApplication } from '@nestjs/common';
 import { AppController } from '../../../app/app.controller';
 import { AppService } from '../../../app/app.service';
 import { ValidationPipe } from '@nestjs/common';
@@ -41,8 +42,7 @@ describe('AppController (Integration)', () => {
     // 1) Intentamos obtener el puerto del servidor HTTP in-process
     const httpServer = app.getHttpServer();
     const address = httpServer.address();
-    const port =
-      typeof address === 'object' && address !== null ? address.port : 0;
+    const port = typeof address === 'object' && address !== null ? address.port : 0;
 
     if (port > 0) {
       // 2) Si tenemos un puerto válido, hacemos una petición HTTP real

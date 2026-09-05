@@ -11,7 +11,6 @@ module.exports = {
     '!**/index.ts',
   ],
   coverageDirectory: 'coverage',
-  coverageReporters: ['text', 'lcov', 'html'],
   moduleNameMapper: {
     '^@kavana-viability-executive/shared$': '<rootDir>/libs/shared/src/index.ts',
     '^@kavana-viability-executive/viability-engine$': '<rootDir>/libs/viability-engine/src/index.ts',

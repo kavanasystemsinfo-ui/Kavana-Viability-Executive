@@ -10,11 +10,13 @@ import { ChatPanelComponent } from '../core/chat/chat-panel.component';
       <app-chat-panel></app-chat-panel>
     </div>
   `,
-  styles: [`
-    .chat-page {
-      display: flex;
-      height: 100vh;
-    }
-  `]
+  styles: [
+    `
+      .chat-page {
+        display: flex;
+        height: 100vh;
+      }
+    `,
+  ],
 })
 export class ChatPageComponent {}

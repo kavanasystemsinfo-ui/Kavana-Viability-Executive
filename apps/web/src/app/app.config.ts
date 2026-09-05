@@ -1,4 +1,4 @@
-import type { ApplicationConfig } from '@angular/core';
+import { ApplicationConfig } from '@angular/core';
 import { provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
 import { appRoutes } from './app.routes';
 import { apiServiceProvider } from './core/api/api.tokens';
 import { ChatService } from './core/chat/chat.service';
-import { MockChatService } from './core/chat/mock-chat.service';
+import { RealChatService } from './core/chat/chat.real.service';
 
 /**
  * Proveedor de Clerk.
@@ -37,7 +37,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch()),
     ...clerkProviders,
     apiServiceProvider,
-    // Chat: MVP usa MockChatService; en tarea 9 se sustituye por OrquestadorService.
-    { provide: ChatService, useClass: MockChatService },
+    // Chat: MVP usa RealChatService (orquestador de IA).
+    { provide: ChatService, useClass: RealChatService },
   ],
 };

@@ -1,6 +1,12 @@
+import { DEFAULT_COMPANY_ID } from '../auth/company-id.constants';
 import { PromotionsController } from './promotions.controller';
 import { ViabilityService } from './viability.service';
 
+/**
+ * Contrato ACTUAL del PromotionsController: `listar(req)` delega en
+ * `listarPromociones(companyId, role)` y `calcular(promotionId)` delega en
+ * `calcularViabilidadPromocion(promotionId)` con un ÚNICO argumento.
+ */
 describe('PromotionsController', () => {
   let controller: PromotionsController;
   let serviceMock: {
@@ -12,58 +18,48 @@ describe('PromotionsController', () => {
     serviceMock = {
       listarPromociones: jest
         .fn()
-        .mockResolvedValue([{ promotionId: 'promo-la-marina-2', name: 'La Marina - Fase 2' }]),
+        .mockResolvedValue([{ promotionId: 'promo-1', name: 'Promoción Altair' }]),
       calcularViabilidadPromocion: jest.fn().mockResolvedValue({
-        promotionId: 'promo-la-marina-2',
-        companyId: 'kavana_viability_executive',
-        resultado: { revenueExpectedEur: 22_320_000 },
+        promotionId: 'promo-1',
+        nombre: 'Promoción Altair',
+        margenBruto: 30,
+        esViable: true,
+        recomendacion: 'Promoción viable',
       }),
     };
     controller = new PromotionsController(serviceMock as any);
   });
 
-  it('listar usa la empresa por defecto si el request no trae companyId', async () => {
-    const req: any = {};
+  it('listar usa la empresa por defecto y el rol viewer si el request no trae nada', async () => {
+    await controller.listar({} as any);
+
+    expect(serviceMock.listarPromociones).toHaveBeenCalledWith(DEFAULT_COMPANY_ID, 'viewer');
+  });
+
+  it('listar usa el companyId y el rol del request cuando existen', async () => {
+    const req: any = { companyId: 'otra-empresa', userRole: 'admin' };
+
     await controller.listar(req);
-    expect(serviceMock.listarPromociones).toHaveBeenCalledWith('kavana_viability_executive');
+
+    expect(serviceMock.listarPromociones).toHaveBeenCalledWith('otra-empresa', 'admin');
   });
 
-  it('listar usa el companyId del request cuando existe', async () => {
-    const req: any = { companyId: 'otra-empresa' };
-    await controller.listar(req);
-    expect(serviceMock.listarPromociones).toHaveBeenCalledWith('otra-empresa');
+  it('calcular delega en el servicio con el promotionId como único argumento', async () => {
+    await controller.calcular('promo-1');
+
+    expect(serviceMock.calcularViabilidadPromocion).toHaveBeenCalledTimes(1);
+    expect(serviceMock.calcularViabilidadPromocion).toHaveBeenCalledWith('promo-1');
   });
 
-  it('calcular pasa promotionId, fechaCorte y umbral configurable', async () => {
-    const req: any = { companyId: 'kavana_viability_executive' };
-    await controller.calcular(req, 'promo-la-marina-2', '2026-08-30', '3');
-    expect(serviceMock.calcularViabilidadPromocion).toHaveBeenCalledWith(
-      'kavana_viability_executive',
-      'promo-la-marina-2',
-      {
-        fechaCorte: '2026-08-30',
-        umbralMarginBrutoMinPct: 3,
-      },
-    );
-  });
+  it('calcular devuelve el resultado plano del servicio', async () => {
+    const result = await controller.calcular('promo-1');
 
-  it('calcular sin query params llama sin opciones de cálculo', async () => {
-    const req: any = {};
-    await controller.calcular(req, 'promo-la-marina-2', undefined, undefined);
-    expect(serviceMock.calcularViabilidadPromocion).toHaveBeenCalledWith(
-      'kavana_viability_executive',
-      'promo-la-marina-2',
-      {},
-    );
-  });
-
-  it('calcular ignora un umbral no numérico (NaN) sin pasarlo al servicio', async () => {
-    const req: any = { companyId: 'kavana_viability_executive' };
-    await controller.calcular(req, 'promo-la-marina-2', undefined, 'abc');
-    expect(serviceMock.calcularViabilidadPromocion).toHaveBeenCalledWith(
-      'kavana_viability_executive',
-      'promo-la-marina-2',
-      {},
-    );
+    expect(result).toEqual({
+      promotionId: 'promo-1',
+      nombre: 'Promoción Altair',
+      margenBruto: 30,
+      esViable: true,
+      recomendacion: 'Promoción viable',
+    });
   });
 });

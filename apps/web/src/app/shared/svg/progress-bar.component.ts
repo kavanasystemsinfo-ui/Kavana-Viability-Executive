@@ -6,16 +6,29 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <svg:svg [attr.width]="width" [attr.height]="height" [attr.viewBox]="'0 0 ' + width + ' ' + height" class="progress-bar">
+    <svg:svg
+      [attr.width]="width"
+      [attr.height]="height"
+      [attr.viewBox]="'0 0 ' + width + ' ' + height"
+      class="progress-bar"
+    >
       <svg:rect x="0" y="0" [attr.width]="width" [attr.height]="height" fill="var(--bg)" />
-      <svg:rect x="0" y="0" [attr.width]="calculatedWidth" [attr.height]="height" [attr.fill]="color" />
+      <svg:rect
+        x="0"
+        y="0"
+        [attr.width]="calculatedWidth"
+        [attr.height]="height"
+        [attr.fill]="color"
+      />
     </svg:svg>
   `,
-  styles: [`
-    .progress-bar {
-      display: block;
-    }
-  `]
+  styles: [
+    `
+      .progress-bar {
+        display: block;
+      }
+    `,
+  ],
 })
 export class ProgressBarComponent {
   @Input() value: number = 0;

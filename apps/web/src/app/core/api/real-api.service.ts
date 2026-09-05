@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, from } from 'rxjs';
+import type { Observable } from 'rxjs';
+import { from } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import type { Promotion } from './api.types';
 import type { ViabilityResult } from './api.types';
@@ -15,28 +16,30 @@ export class RealApiService {
 
   listPromotions(): Observable<Promotion[]> {
     return from(this.authService.getClerkToken()).pipe(
-      switchMap(token => {
+      switchMap((token) => {
         const headers = { Authorization: `Bearer ${token}` };
         return this.http.get<Promotion[]>(`${this.apiBaseUrl}/api/promotions`, { headers });
-      })
+      }),
     );
   }
 
   getPromotion(id: string): Observable<Promotion> {
     return from(this.authService.getClerkToken()).pipe(
-      switchMap(token => {
+      switchMap((token) => {
         const headers = { Authorization: `Bearer ${token}` };
         return this.http.get<Promotion>(`${this.apiBaseUrl}/api/promotions/${id}`, { headers });
-      })
+      }),
     );
   }
 
   getViability(id: string): Observable<ViabilityResult> {
     return from(this.authService.getClerkToken()).pipe(
-      switchMap(token => {
+      switchMap((token) => {
         const headers = { Authorization: `Bearer ${token}` };
-        return this.http.get<ViabilityResult>(`${this.apiBaseUrl}/api/promotions/${id}/viability`, { headers });
-      })
+        return this.http.get<ViabilityResult>(`${this.apiBaseUrl}/api/promotions/${id}/viability`, {
+          headers,
+        });
+      }),
     );
   }
 }

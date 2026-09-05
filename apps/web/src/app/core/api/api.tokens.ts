@@ -13,5 +13,5 @@ export function apiServiceFactory(): ApiService {
 
 export const apiServiceProvider: FactoryProvider = {
   provide: API_SERVICE,
-  useFactory: apiServiceFactory
+  useFactory: apiServiceFactory,
 };
